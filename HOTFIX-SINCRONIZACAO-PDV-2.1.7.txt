@@ -1,0 +1,27 @@
+ADEGA PDV 2.1.7 - HOTFIX SINCRONIZAÇÃO DO PDV
+================================================
+
+PROBLEMA
+Após finalizar um inventário ou fazer ajustes de estoque, a tela de estoque
+era atualizada, porém a lista mantida em memória pelo PDV continuava com
+as quantidades anteriores. O usuário precisava fechar e abrir o aplicativo.
+
+CORREÇÕES
+- ao abrir a tela PDV, os produtos são consultados novamente no servidor;
+- ao finalizar inventário, o cache do PDV é atualizado imediatamente;
+- movimentações manuais de estoque também atualizam o PDV;
+- o resumo de estoque é atualizado junto;
+- se já houver itens no carrinho, os limites de estoque são reconciliados
+  com a quantidade atual:
+  * item sem estoque é removido do carrinho;
+  * quantidade acima do disponível é reduzida ao limite atual;
+  * o campo de estoque do item é atualizado.
+
+RESULTADO ESPERADO
+1. Abra um inventário.
+2. Altere a quantidade física de um produto.
+3. Finalize o inventário.
+4. Vá para o PDV.
+5. A nova quantidade deve aparecer imediatamente, sem reiniciar o programa.
+
+As chaves/licenças anteriores continuam compatíveis.

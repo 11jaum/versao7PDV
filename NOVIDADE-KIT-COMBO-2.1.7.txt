@@ -1,0 +1,55 @@
+ADEGA PDV 2.1.7 STANDARD - KIT / COMBO COM BAIXA AUTOMATICA
+============================================================
+
+OBJETIVO
+Permitir produtos como:
+- Balde Heineken 269ml com 10 unidades
+- Balde Corona com 6 unidades
+- Combo com cerveja + gelo + energético
+
+O Kit/Combo não possui estoque próprio. O estoque disponível é calculado a
+partir dos produtos físicos vinculados.
+
+EXEMPLO
+Produto físico:
+- HEINEKEN 269ML
+- Estoque: 47 unidades
+
+Produto Kit/Combo:
+- BALDE HEINEKEN 10 UNIDADES
+- Componente: HEINEKEN 269ML
+- Quantidade retirada por venda: 10
+
+Resultado:
+- O PDV mostra 4 baldes disponíveis.
+- Ao vender 1 balde, o estoque da HEINEKEN cai de 47 para 37.
+- Ao cancelar a venda, as 10 HEINEKEN voltam ao estoque.
+
+COMO CADASTRAR
+1. Estoque > Novo Produto.
+2. Cadastre nome e preço normalmente.
+3. Em Controle de estoque, escolha:
+   Kit / Combo - 1 venda baixa várias unidades físicas
+4. Em Produto físico 1, escolha a cerveja/item base.
+5. Em Quantidade retirada por venda, informe 10 (ou a quantidade desejada).
+6. Opcionalmente, configure até mais 2 produtos físicos.
+7. Salve.
+
+REGRAS
+- Aceita de 1 a 3 produtos físicos por Kit/Combo.
+- Cada componente aceita quantidade inteira por venda.
+- O Kit/Combo não recebe entrada/saída manual de estoque.
+- O inventário conta somente os produtos físicos normais.
+- Comandas também baixam o Kit/Combo corretamente.
+- Remover/cancelar item da comanda devolve os componentes.
+- Cancelar venda finalizada devolve os componentes.
+- Produto físico usado por Kit/Combo ativo não pode ser desativado ou
+  transformado em estoque automático enquanto o vínculo existir.
+- Depois que um Kit/Combo possuir venda finalizada ou estiver em comanda
+  aberta, sua composição fica protegida. Para mudar a composição, crie um
+  novo Kit/Combo. Isso preserva cancelamentos e devoluções corretas.
+
+COMPATIBILIDADE
+- Mantém produtos normais e fracionados existentes.
+- Mantém licenças da linha 2.1.x compatíveis.
+- A migração da tabela produto_kit_componentes é automática ao iniciar.

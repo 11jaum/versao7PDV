@@ -1,0 +1,33 @@
+ADEGA PDV 2.1.7 - HOTFIX CARDS PRINCIPAIS DO DASHBOARD
+========================================================
+
+PROBLEMA
+A atualização automática do Dashboard funcionava em outras áreas, mas os
+quatro cards do topo podiam continuar com valores antigos:
+- Faturamento hoje
+- Vendas hoje
+- Produtos cadastrados / itens em estoque
+- Estoque baixo / produtos zerados
+
+CORREÇÃO
+- criada uma API exclusiva: /api/dashboard/resumo;
+- os 4 cards usam a MESMA fotografia de dados;
+- resposta e fetch usam no-store/no-cache;
+- query de vendas usa corretamente criado_em com 'localtime';
+- atualização ocorre a cada 5 segundos enquanto o Dashboard estiver aberto;
+- ao entrar/voltar para o Dashboard, atualização é imediata;
+- finalizar inventário também força atualização dos cards;
+- comparativos Hoje x Ontem usam o mesmo resumo;
+- produtos fracionados virtuais não entram como unidades físicas em
+  itens/estoque baixo/produtos zerados.
+
+TESTE
+1. Abra o Dashboard e anote os 4 cards.
+2. Faça uma venda.
+3. Volte ao Dashboard.
+4. Faturamento e Vendas devem mudar imediatamente.
+5. Faça entrada/saída ou finalize inventário.
+6. Produtos/itens/estoque baixo devem refletir os dados atuais.
+7. Sem fazer nada, a tela consulta novamente em até 5 segundos.
+
+As licenças existentes continuam compatíveis.

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Login | Adega PDV</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+<div class="login-shell">
+
+    <section class="login-brand" aria-hidden="true">
+
+        <div class="brand-glow brand-glow-1"></div>
+        <div class="brand-glow brand-glow-2"></div>
+
+        <div class="brand-topo">
+            <div class="brand-logo">
+                <svg viewBox="0 0 32 48">
+                    <path d="M12 3h8v7l3 5v27c0 2-1.7 3-3.7 3h-6.6C10.7 45 9 44 9 42V15l3-5V3Z"/>
+                    <path d="M12 10h8M10 22h12M12 26h8v10h-8z"/>
+                </svg>
+            </div>
+
+            <div class="brand-nome">
+                <strong>ADEGA <span>PDV</span></strong>
+                <small>Gestão inteligente</small>
+            </div>
+        </div>
+
+
+        <div class="brand-conteudo">
+            <span class="brand-chip">Sistema local • seguro • rápido</span>
+
+            <h1>
+                Sua adega organizada.<br>
+                Seu atendimento mais rápido.
+            </h1>
+
+            <p>
+                Vendas, estoque, caixa e relatórios em uma experiência
+                simples para o dia a dia.
+            </p>
+
+
+            <div class="brand-recursos">
+
+                <div>
+                    <span class="brand-recurso-icone">
+                        <svg viewBox="0 0 24 24"><path d="M3 4h2l2 10h10l3-7H7"/><circle cx="10" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg>
+                    </span>
+                    <div>
+                        <strong>PDV rápido</strong>
+                        <small>Venda com poucos cliques ou pelo teclado.</small>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="brand-recurso-icone">
+                        <svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>
+                    </span>
+                    <div>
+                        <strong>Estoque integrado</strong>
+                        <small>Movimentações e alertas atualizados automaticamente.</small>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="brand-recurso-icone">
+                        <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+                    </span>
+                    <div>
+                        <strong>Visão do negócio</strong>
+                        <small>Dashboard e relatórios para acompanhar a operação.</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="brand-rodape">
+            <span class="status-dot"></span>
+            Adega PDV • Aplicativo local
+        </div>
+
+    </section>
+
+
+    <main class="login-area">
+
+        <div class="login-container">
+
+            <div class="login-mobile-logo">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 32 48">
+                        <path d="M12 3h8v7l3 5v27c0 2-1.7 3-3.7 3h-6.6C10.7 45 9 44 9 42V15l3-5V3Z"/>
+                        <path d="M12 10h8M10 22h12M12 26h8v10h-8z"/>
+                    </svg>
+                </div>
+                <strong>ADEGA <span>PDV</span></strong>
+            </div>
+
+
+            <div class="login-card">
+
+                <div class="login-cabecalho">
+                    <span class="login-chip">Acesso ao sistema</span>
+                    <h2>Bem-vindo de volta</h2>
+                    <p>Entre com seu usuário para continuar.</p>
+                </div>
+
+
+                <form id="formLogin">
+
+                    <div class="campo">
+                        <label for="usuario">Usuário</label>
+
+                        <div class="input-com-icone">
+                            <span>
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"/></svg>
+                            </span>
+
+                            <input
+                                id="usuario"
+                                type="text"
+                                autocomplete="username"
+                                placeholder="Digite seu usuário"
+                                required
+                                autofocus
+                            >
+                        </div>
+                    </div>
+
+
+                    <div class="campo">
+
+                        <div class="label-linha">
+                            <label for="senha">Senha</label>
+                            <small>Protegido localmente</small>
+                        </div>
+
+                        <div class="senha-container input-com-icone">
+
+                            <span>
+                                <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                            </span>
+
+                            <input
+                                id="senha"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Digite sua senha"
+                                required
+                            >
+
+                            <button
+                                id="btnMostrarSenha"
+                                type="button"
+                                class="mostrar-senha"
+                                title="Mostrar senha"
+                                aria-label="Mostrar senha"
+                            >
+                                <svg class="icone-olho" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="erroLogin"
+                        class="erro-login"
+                        role="alert"
+                    >
+                        <span class="erro-login-icone">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16h.01"/></svg>
+                        </span>
+                        <span id="erroLoginTexto"></span>
+                    </div>
+
+
+                    <button
+                        id="btnEntrar"
+                        class="btn-entrar"
+                        type="submit"
+                    >
+                        <span class="btn-entrar-texto">Entrar no sistema</span>
+                        <span class="btn-entrar-loading" aria-hidden="true">
+                            <i></i>
+                            Entrando...
+                        </span>
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+                    </button>
+
+                </form>
+
+
+                <div class="login-seguranca">
+                    <span>
+                        <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </span>
+                    <p>
+                        Seus dados e seu banco ficam armazenados localmente neste computador.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <p class="login-versao">
+                Adega PDV <strong>2.1.7</strong>
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>

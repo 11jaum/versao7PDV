@@ -1,0 +1,19 @@
+ADEGA PDV 2.1.7 STANDARD
+========================
+
+Esta é a versão STANDARD (não Lite), baseada na 2.1.6.
+
+NOVIDADE PRINCIPAL
+Kit / Combo com baixa automática de produtos físicos.
+
+Exemplo:
+BALDE HEINEKEN 10 UNIDADES -> ao vender 1, baixa 10 HEINEKEN 269ML.
+
+ATUALIZAÇÃO A PARTIR DA 2.1.6 STANDARD
+1. Faça backup do sistema.
+2. Feche o Adega PDV.
+3. Aplique o patch 2.1.7 sobre a pasta da 2.1.6 Standard.
+4. Rode PREPARAR-WEBVIEW2.bat novamente.
+5. Abra dist\AdegaPDV.exe.
+
+A migração do banco é automática e não apaga os dados existentes.

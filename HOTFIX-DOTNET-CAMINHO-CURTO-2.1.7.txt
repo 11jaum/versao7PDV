@@ -1,0 +1,35 @@
+ADEGA PDV 2.1.7 - HOTFIX .NET / CAMINHO LONGO
+================================================
+
+Erro corrigido:
+dotnet-install falhava durante "Extracting the archive" com
+DirectoryNotFoundException em caminhos profundos como:
+DotnetTools\dotnet-watch\...\BuildHost-netcore\...
+
+CAUSA
+O .NET SDK estava sendo instalado em:
+<pasta do projeto>\.tools\dotnet
+
+Quando o projeto ficava dentro de uma pasta comprida em Downloads,
+os arquivos internos do SDK podiam ultrapassar o limite de caminho
+usado pelo PowerShell/rotina de extração do dotnet-install.
+
+CORREÇÃO
+- Build tools agora ficam em um caminho curto:
+  %LOCALAPPDATA%\AdegaPDV\BuildTools
+- Node portátil: BuildTools\node22
+- .NET 8 SDK: BuildTools\dotnet8
+- cache NuGet: BuildTools\nuget
+- DOTNET_CLI_HOME também usa a pasta curta
+- instalação parcial do .NET é apagada antes de uma nova tentativa
+
+O projeto pode continuar dentro de Downloads. Não é necessário instalar
+.NET globalmente, Python ou Visual Studio Build Tools.
+
+COMO USAR
+1. Extraia esta versão 2.1.7.
+2. Execute PREPARAR-WEBVIEW2.bat.
+3. O preparador baixa/usa as ferramentas em AppData\Local\AdegaPDV.
+4. Ao concluir, abra dist\AdegaPDV.exe.
+
+O sistema de licenciamento e as chaves da versão 2.1.0 permanecem compatíveis.

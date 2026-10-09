@@ -1,0 +1,62 @@
+ADEGA PDV 2.1.7 - SISTEMA DE LICENÇAS
+=====================================
+
+O QUE FOI ADICIONADO
+--------------------
+- Ativação obrigatória antes do login.
+- Chaves temporárias com vencimento automático.
+- Chaves permanentes sem vencimento.
+- Chaves opcionais vinculadas a uma instalação específica.
+- Validação offline por assinatura digital Ed25519.
+- A chave privada NÃO fica dentro do Adega PDV distribuído.
+- Tela própria de ativação.
+- Código da instalação com botão de copiar.
+- Área Sistema > Licenciamento para consultar e trocar a licença.
+- Redirecionamento automático para ativação quando uma licença temporária expira.
+- APIs operacionais bloqueadas quando a licença não é válida.
+
+ARQUIVOS LOCAIS
+---------------
+A ativação é armazenada em:
+  data/licenca.json
+
+O identificador da instalação fica em:
+  data/instalacao.id
+
+Para licenças temporárias, o controle local de relógio fica em:
+  data/licenca-state.json
+
+Esses arquivos ficam fora do banco SQLite. Restaurar um backup do banco não remove a licença.
+Atualizações do Adega PDV também preservam a pasta data.
+
+COMO FUNCIONA PARA O CLIENTE
+----------------------------
+1. Ao abrir uma instalação sem licença, o Adega PDV abre a tela de ativação.
+2. O cliente copia o Código desta instalação.
+3. O proprietário do software gera uma chave no pacote separado "Gerador de Licenças".
+4. O cliente cola a chave e ativa.
+5. Com licença válida, o login e as demais APIs são liberados.
+
+TEMPORÁRIA
+----------
+A chave possui uma data/hora de expiração assinada digitalmente.
+Quando vence, o sistema bloqueia as APIs e volta para a tela de ativação.
+
+PERMANENTE
+----------
+Não possui data de expiração.
+
+VINCULADA
+---------
+Se o gerador receber o Código da instalação, a chave só é aceita por aquela instalação.
+Se o código for deixado vazio, a chave será genérica e poderá ser usada em qualquer instalação.
+Para uso comercial, prefira chaves vinculadas.
+
+IMPORTANTE SOBRE SEGURANÇA
+--------------------------
+Este é um licenciamento OFFLINE. O aplicativo distribuído possui somente a chave pública.
+A chave privada deve ser mantida exclusivamente pelo proprietário no pacote administrativo separado.
+
+Como o Adega PDV é um aplicativo local baseado em JavaScript/Node e os arquivos estão no computador do usuário,
+nenhum bloqueio totalmente offline é impossível de remover por uma pessoa com conhecimento técnico que altere o código.
+Para controle antifraude mais forte seria necessário um servidor externo de ativação/validação.

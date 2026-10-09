@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Ativação | Adega PDV</title>
+    <link rel="stylesheet" href="css/ativacao.css">
+</head>
+<body>
+
+<div class="ativacao-shell">
+
+    <section class="ativacao-brand" aria-hidden="true">
+        <div class="brand-glow brand-glow-1"></div>
+        <div class="brand-glow brand-glow-2"></div>
+
+        <div class="brand-topo">
+            <div class="brand-logo">
+                <svg viewBox="0 0 32 48">
+                    <path d="M12 3h8v7l3 5v27c0 2-1.7 3-3.7 3h-6.6C10.7 45 9 44 9 42V15l3-5V3Z"/>
+                    <path d="M12 10h8M10 22h12M12 26h8v10h-8z"/>
+                </svg>
+            </div>
+            <div class="brand-nome">
+                <strong>ADEGA <span>PDV</span></strong>
+                <small>Licenciamento local</small>
+            </div>
+        </div>
+
+        <div class="brand-conteudo">
+            <span class="brand-chip">Ativação segura • sem internet</span>
+            <h1>Ative sua licença<br>para começar.</h1>
+            <p>
+                O sistema aceita licenças temporárias ou permanentes.
+                A validação acontece localmente por assinatura digital.
+            </p>
+
+            <div class="brand-recursos">
+                <div>
+                    <span class="recurso-icone">✓</span>
+                    <div>
+                        <strong>Licença temporária</strong>
+                        <small>Expira automaticamente na data definida.</small>
+                    </div>
+                </div>
+                <div>
+                    <span class="recurso-icone">∞</span>
+                    <div>
+                        <strong>Licença permanente</strong>
+                        <small>Não possui data de vencimento.</small>
+                    </div>
+                </div>
+                <div>
+                    <span class="recurso-icone">⌁</span>
+                    <div>
+                        <strong>Vínculo por instalação</strong>
+                        <small>A chave pode ser emitida para apenas um computador.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="brand-rodape">
+            <span class="status-dot"></span>
+            Adega PDV • Ativação offline
+        </div>
+    </section>
+
+    <main class="ativacao-area">
+        <div class="ativacao-container">
+            <div class="ativacao-card">
+                <div class="ativacao-cabecalho">
+                    <span class="ativacao-chip">Licença do aplicativo</span>
+                    <h2>Ativar Adega PDV</h2>
+                    <p id="statusLicencaTexto">
+                        Informe a chave fornecida pelo responsável pelo sistema.
+                    </p>
+                </div>
+
+                <div class="instalacao-box">
+                    <div>
+                        <span>Código desta instalação</span>
+                        <strong id="instalacaoId">Carregando...</strong>
+                    </div>
+                    <button
+                        type="button"
+                        id="btnCopiarInstalacao"
+                        class="btn-secundario"
+                    >
+                        Copiar
+                    </button>
+                </div>
+
+                <small class="instalacao-ajuda">
+                    Para impedir o compartilhamento da licença, envie este código ao responsável pela geração da chave.
+                </small>
+
+                <form id="formAtivacao">
+                    <label for="chaveLicenca">Chave de licença</label>
+                    <textarea
+                        id="chaveLicenca"
+                        rows="6"
+                        maxlength="4096"
+                        spellcheck="false"
+                        autocomplete="off"
+                        placeholder="ADG1.eyJ2IjoxLC4uLn0.assinatura"
+                        required
+                    ></textarea>
+
+                    <div id="erroAtivacao" class="mensagem mensagem-erro" role="alert"></div>
+                    <div id="sucessoAtivacao" class="mensagem mensagem-sucesso" role="status"></div>
+
+                    <button id="btnAtivar" class="btn-ativar" type="submit">
+                        <span>Ativar sistema</span>
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+                    </button>
+                </form>
+
+                <div class="seguranca-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+                    <p>
+                        A chave privada que gera as licenças não fica dentro do Adega PDV.
+                    </p>
+                </div>
+            </div>
+
+            <p class="versao">Adega PDV <strong>2.1.7</strong></p>
+        </div>
+    </main>
+
+</div>
+
+<script src="js/ativacao.js"></script>
+</body>
+</html>

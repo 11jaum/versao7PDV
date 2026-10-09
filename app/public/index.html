@@ -1,0 +1,3824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adega PDV</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo logo-moderno">
+                <div class="logo-icon logo-garrafa" id="logoSistema" aria-hidden="true">
+                    <svg viewBox="0 0 32 48">
+                        <path d="M12 3h8v7l3 5v27c0 2-1.7 3-3.7 3h-6.6C10.7 45 9 44 9 42V15l3-5V3Z"/>
+                        <path d="M12 10h8M10 22h12M12 26h8v10h-8z"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h2 id="nomeAdegaSistema">ADEGA <span>PDV</span></h2>
+                    <span id="subtituloAdegaSistema">Gestão inteligente</span>
+                </div>
+            </div>
+
+            <nav class="menu">
+
+                <button
+                    class="menu-item ativo"
+                    data-tela="dashboard"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h5v-6h4v6h5v-9.5"/></svg></span>
+                    Dashboard
+                </button>
+
+                <button
+                    class="menu-item"
+                    data-tela="pdv"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 8H7"/><circle cx="10" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg></span>
+                    PDV
+                </button>
+
+                <button
+                    class="menu-item"
+                    data-tela="comandas"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v3H7z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="M8 10h8M8 14h8M8 18h5"/></svg></span>
+                    Comandas
+                </button>
+
+                <button
+                    class="menu-item"
+                    data-tela="estoque"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></span>
+                    Estoque
+                </button>
+
+                <button
+                    class="menu-item"
+                    data-tela="inventario"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24"><path d="M8 4h8M9 2h6v4H9z"/><rect x="5" y="4" width="14" height="17" rx="2"/><path d="m8 12 2 2 4-4M8 17h7"/></svg></span>
+                    Inventário
+                </button>
+
+                <button
+                    class="menu-item"
+                    data-tela="caixa"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h4"/><circle cx="17.5" cy="12" r="1.5"/></svg></span>
+                    Caixa
+                </button>
+
+                <button
+                    class="menu-item"
+                    data-tela="relatorios"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+                    Relatórios
+                </button>
+
+                <button
+                    class="menu-item menu-admin"
+                    data-tela="fechamentoMensal"
+                    id="menuFechamentoMensal"
+                    style="display: none;"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h3M13 14h3M8 18h3"/></svg></span>
+                    Fechamento Mensal
+                </button>
+
+
+                <button
+                    class="menu-item menu-admin"
+                    data-tela="usuarios"
+                    id="menuUsuarios"
+                    style="display: none;"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.2 2.7-5.8 6-5.8s6 2.6 6 5.8"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 15.5c2.8.2 5 2.2 5.5 4.5"/></svg></span>
+                    Usuários
+                </button>
+
+
+                <button
+                    class="menu-item menu-admin"
+                    data-tela="auditoria"
+                    id="menuAuditoria"
+                    style="display: none;"
+                >
+                    <span class="menu-icone"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                    Auditoria
+                </button>
+
+
+                <button class="menu-item menu-admin" data-tela="configuracoes" id="menuConfiguracoes" style="display: none;">
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21h-4v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1A1.7 1.7 0 0 0 4.6 15 1.7 1.7 0 0 0 3.1 14H3v-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.5V3h4v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.5 1H21v4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></span>
+                    Configurações
+                </button>
+
+
+                <button class="menu-item menu-admin" data-tela="sistema" id="menuSistema" style="display: none;">
+                    <span class="menu-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+                    Sistema
+                </button>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="status-sistema status-sistema-moderno">
+                    <span class="status-bolinha"></span>
+                    <div>
+                        <strong>Sistema online</strong>
+                        <small>Servidor local ativo</small>
+                    </div>
+                </div>
+                <button class="sidebar-sobre" type="button" data-ir="sistema">
+                    <span class="menu-icone"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg></span>
+                    Sobre o sistema
+                </button>
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main">
+
+            <!-- TOPO -->
+            <header class="topbar topbar-moderna">
+
+                <div class="topbar-busca" id="topbarBusca">
+                    <span class="topbar-busca-icone">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                    </span>
+                    <input
+                        type="text"
+                        id="buscaGlobal"
+                        placeholder="Buscar produto no PDV... (F2)"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="topbar-direita">
+
+                    <div class="caixa-status caixa-status-moderno">
+                        <span class="bolinha-caixa"></span>
+                        <div>
+                            <small>Caixa</small>
+                            <strong id="statusCaixa">Fechado</strong>
+                        </div>
+                    </div>
+
+                    
+            <button class="btn-tema-moderno btn-tela-cheia" id="btnTelaCheia" type="button"
+                    title="Tela cheia" aria-label="Ativar tela cheia">
+                <svg class="icone-tela-cheia entrar" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
+                </svg>
+                <svg class="icone-tela-cheia sair" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 3v6H3M15 3v6h6M9 21v-6H3M15 21v-6h6"/>
+                </svg>
+            </button>
+<button
+                        id="btnTema"
+                        class="btn-tema btn-tema-moderno"
+                        type="button"
+                        title="Alternar tema"
+                        aria-label="Alternar tema"
+                    >
+                        <span id="iconeTema">☾</span>
+                        <span id="textoTema" class="sr-only">Modo escuro</span>
+                    </button>
+
+                    <div class="data data-moderna">
+                        <span id="dataAtual"></span>
+                    </div>
+
+                    <div class="usuario-logado usuario-logado-moderno" id="usuarioLogado">
+
+                        <div class="usuario-avatar" id="avatarUsuario">JP</div>
+
+                        <div class="usuario-info">
+                            <strong id="nomeUsuario">Usuário</strong>
+                            <small id="perfilUsuario">Perfil</small>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="btnMinhaSenha"
+                            class="btn-icon-topo"
+                            title="Alterar minha senha"
+                            aria-label="Alterar minha senha"
+                        >
+                            <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg>
+                        </button>
+
+                        <button
+                            type="button"
+                            id="btnLogout"
+                            class="btn-icon-topo btn-logout-moderno"
+                            title="Sair do sistema"
+                            aria-label="Sair do sistema"
+                        >
+                            <svg viewBox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M8 12h10"/></svg>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD -->
+<section id="dashboard" class="tela ativa dashboard-novo">
+
+    <div class="dashboard-hero">
+        <div class="dashboard-hero-overlay"></div>
+
+        <div class="dashboard-hero-conteudo">
+            <span class="dashboard-hero-chip" id="dashboardHeroChip">Visão geral</span>
+            <h2>Bem-vindo, <span id="dashboardNomeUsuario">Usuário</span>!</h2>
+            <p id="dashboardHeroTexto">Aqui está um resumo da sua adega hoje.</p>
+
+            <div class="dashboard-hero-frase">
+                “Bons momentos começam aqui.”
+            </div>
+        </div>
+
+        <div class="dashboard-hero-tempo">
+            <div>
+                <span class="hero-tempo-icone">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+                </span>
+                <div>
+                    <strong id="dashboardDiaSemana">Hoje</strong>
+                    <small id="dashboardDataCompleta">—</small>
+                </div>
+            </div>
+
+            <div>
+                <span class="hero-tempo-icone">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </span>
+                <div>
+                    <strong id="dashboardHoraAtual">--:--</strong>
+                    <small>Hora do sistema</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dashboard-kpis-principais">
+
+        <article class="dash-card dash-card-verde">
+            <div class="dash-card-icone">
+                <svg viewBox="0 0 24 24"><path d="M12 3v18M16 7.5c0-1.7-1.8-3-4-3S8 5.8 8 7.5s1.5 2.6 4 3 4 1.2 4 3S14.2 17 12 17s-4-1.3-4-3"/></svg>
+            </div>
+            <div class="dash-card-conteudo">
+                <span>Faturamento hoje</span>
+                <strong id="dashboardFaturamento">R$ 0,00</strong>
+                <small id="dashComparativoFaturamento">Hoje vs. ontem: —</small>
+            </div>
+            <div class="dash-mini-grafico" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i>
+            </div>
+        </article>
+
+
+        <article class="dash-card dash-card-azul">
+            <div class="dash-card-icone">
+                <svg viewBox="0 0 24 24"><path d="M3 4h2l2 10h10l3-7H7"/><circle cx="10" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>
+            </div>
+            <div class="dash-card-conteudo">
+                <span>Vendas hoje</span>
+                <strong id="dashboardVendas">0</strong>
+                <small id="dashComparativoVendas">Hoje vs. ontem: —</small>
+            </div>
+            <div class="dash-mini-barras" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+            </div>
+        </article>
+
+
+        <article class="dash-card dash-card-roxo">
+            <div class="dash-card-icone">
+                <svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>
+            </div>
+            <div class="dash-card-conteudo">
+                <span>Produtos cadastrados</span>
+                <strong id="dashboardProdutos">0</strong>
+                <small><span id="totalItensEstoque">0</span> itens no estoque</small>
+            </div>
+            <div class="dash-progresso">
+                <span></span>
+            </div>
+        </article>
+
+
+        <article class="dash-card dash-card-laranja">
+            <div class="dash-card-icone">
+                <svg viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17h.01"/></svg>
+            </div>
+            <div class="dash-card-conteudo">
+                <span>Estoque baixo</span>
+                <strong id="dashboardEstoqueBaixo">0</strong>
+                <small><span id="produtosSemEstoque">0</span> produtos zerados</small>
+            </div>
+            <button class="dash-link-card" type="button" data-ir="estoque">Ver produtos →</button>
+        </article>
+
+    </div>
+
+
+    <div class="dashboard-grid-principal dashboard-admin-only">
+
+        <div class="painel dash-painel dash-grafico-principal">
+
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Vendas da semana</h3>
+                    <p>Faturamento diário dos últimos 7 dias</p>
+                </div>
+
+                <button class="botao-secundario botao-icone-texto" id="btnAtualizarDashboardAvancado" type="button">
+                    <svg viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 8A7 7 0 0 1 18 7l2 5M18 16a7 7 0 0 1-12 1l-2-5"/></svg>
+                    Atualizar
+                </button>
+            </div>
+
+            <div class="dash-grafico-legenda">
+                <div>
+                    <span class="legenda-ponto azul"></span>
+                    <strong id="dash7Faturamento">R$ 0,00</strong>
+                    <small>nos últimos 7 dias</small>
+                </div>
+                <div>
+                    <span id="dash7Vendas">0</span>
+                    <small>vendas</small>
+                </div>
+                <div>
+                    <span id="dash7Ticket">R$ 0,00</span>
+                    <small>ticket médio</small>
+                </div>
+            </div>
+
+            <div class="grafico-dashboard grafico-dashboard-moderno" id="graficoDashboard7Dias"></div>
+
+        </div>
+
+
+        <div class="painel dash-painel dash-ranking-painel">
+
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Produtos mais vendidos</h3>
+                    <p>Ranking dos últimos 30 dias</p>
+                </div>
+                <span class="dash-periodo-chip">30 dias</span>
+            </div>
+
+            <div class="ranking-dashboard ranking-dashboard-moderno" id="rankingProdutosDashboard">
+                <div class="skeleton-lista">
+        <i></i><i></i><i></i><i></i><i></i>
+    </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-grid-secundario">
+
+        <div class="painel dash-painel dash-categorias-painel">
+
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Categorias</h3>
+                    <p>Distribuição do estoque</p>
+                </div>
+                <button class="dash-link-btn" type="button" data-ir="estoque">Ver produtos →</button>
+            </div>
+
+            <div class="dash-categorias-conteudo">
+                <div class="dash-donut-wrap">
+                    <div class="dash-donut" id="dashboardDonutCategorias">
+                        <div class="dash-donut-centro">
+                            <strong id="dashboardDonutTotal">0</strong>
+                            <span>produtos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-categorias-legenda" id="dashboardCategoriasLegenda">
+                    <div class="skeleton-lista skeleton-lista-curta">
+        <i></i><i></i><i></i><i></i>
+    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="painel dash-painel dash-caixa-painel">
+
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Caixa</h3>
+                    <p>Situação atual do caixa</p>
+                </div>
+                <button class="dash-link-btn" type="button" data-ir="caixa">Abrir caixa →</button>
+            </div>
+
+            <div class="dashboard-caixa-status" id="dashboardCaixaStatusBox">
+                <div class="dashboard-caixa-icone" id="dashboardCaixaIcone">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
+                </div>
+                <div>
+                    <span>Situação</span>
+                    <strong id="dashboardCaixaSituacao">Fechado</strong>
+                </div>
+            </div>
+
+            <div class="dashboard-caixa-dados dashboard-caixa-dados-moderno">
+                <div>
+                    <span>Valor inicial</span>
+                    <strong id="dashboardCaixaInicial">R$ 0,00</strong>
+                </div>
+                <div>
+                    <span>Vendido</span>
+                    <strong id="dashboardCaixaVendas">R$ 0,00</strong>
+                </div>
+                <div>
+                    <span>Dinheiro esperado</span>
+                    <strong id="dashboardCaixaEsperado">R$ 0,00</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="painel dash-painel dash-alertas-painel">
+
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Alertas</h3>
+                    <p>Itens que merecem atenção</p>
+                </div>
+                <button class="dash-link-btn" type="button" data-ir="estoque">Ver todos →</button>
+            </div>
+
+            <div class="dash-alertas-lista">
+
+                <div class="dash-alerta-item alerta-amarelo">
+                    <span class="dash-alerta-icone">
+                        <svg viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17h.01"/></svg>
+                    </span>
+                    <div>
+                        <strong>Estoque baixo</strong>
+                        <small>Produtos no mínimo</small>
+                    </div>
+                    <b id="dashboardSemEstoqueAlerta">0</b>
+                </div>
+
+                <div class="dash-alerta-item alerta-vermelho">
+                    <span class="dash-alerta-icone">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16h.01"/></svg>
+                    </span>
+                    <div>
+                        <strong>Vencem em 7 dias</strong>
+                        <small id="dashboardVencidosTexto">0 produtos vencidos</small>
+                    </div>
+                    <b id="dashboardVencemSemana">0</b>
+                </div>
+
+                <div class="dash-alerta-item alerta-azul dashboard-admin-only">
+                    <span class="dash-alerta-icone">
+                        <svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
+                    </span>
+                    <div>
+                        <strong>Produtos sem venda</strong>
+                        <small>Sem giro recente</small>
+                    </div>
+                    <b id="dashProdutosParados">0</b>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-grid-inferior">
+
+        <div class="painel dash-painel">
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Estoque baixo</h3>
+                    <p>Produtos que precisam de reposição</p>
+                </div>
+            </div>
+            <div class="lista-dashboard-atencao" id="listaEstoqueBaixoDashboard"></div>
+        </div>
+
+        <div class="painel dash-painel">
+            <div class="dash-painel-topo">
+                <div>
+                    <h3>Validades próximas</h3>
+                    <p>Vencidos ou próximos do vencimento</p>
+                </div>
+            </div>
+            <div class="dashboard-validade-lista" id="dashboardListaValidades">
+                <div class="dashboard-vazio">Nenhum produto próximo do vencimento.</div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- IDs mantidos para compatibilidade das rotinas financeiras existentes -->
+    <div class="dashboard-compatibilidade admin-custo" aria-hidden="true">
+        <span id="dashboardLucro">R$ 0,00</span>
+        <span id="dashboardMargem">0,00%</span>
+        <span id="dashboardResumoFaturamento">R$ 0,00</span>
+        <span id="dashboardResumoCusto">R$ 0,00</span>
+        <span id="dashboardResumoLucro">R$ 0,00</span>
+        <span id="dashboardResumoMargem">0,00%</span>
+        <span id="valorCustoEstoque">R$ 0,00</span>
+        <span id="valorVendaEstoque">R$ 0,00</span>
+        <span id="dashboardPerdasMes">R$ 0,00</span>
+        <span id="dashboardPerdasMesQtd">0 unidades perdidas</span>
+        <div id="listaProdutosParadosDashboard"></div>
+    </div>
+
+</section>
+
+
+<!-- ESTOQUE -->
+
+            <!-- DASHBOARD -->
+            <section id="estoque" class="tela">
+
+                <div class="estoque-topo">
+                    <div>
+                        <h2>Controle de Estoque</h2>
+                        <p>Gerencie produtos e movimentações.</p>
+                    </div>
+
+                    <div class="estoque-topo-acoes">
+                        <button
+                            class="botao-secundario admin-planilha"
+                            id="btnPlanilhaEstoque"
+                            type="button"
+                            style="display:none;"
+                        >
+                            <span class="botao-svg-icone">
+                                <svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5M8 12h8M8 16h8"/></svg>
+                            </span>
+                            Importar / Exportar
+                        </button>
+
+                        <button class="botao-principal" id="btnNovoProduto">
+                            + Novo Produto
+                        </button>
+                    </div>
+                </div>
+
+                <div class="estoque-filtros">
+
+                    <input
+                        type="text"
+                        id="pesquisaProduto"
+                        placeholder="Pesquisar produto..."
+                    >
+
+                    <select id="filtroEstoque">
+                        <option value="todos">Todos</option>
+                        <option value="normal">Estoque normal</option>
+                        <option value="baixo">Estoque baixo</option>
+                        <option value="zerado">Sem estoque</option>
+                    </select>
+
+                </div>
+
+                <div class="painel tabela-container">
+
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Categoria</th>
+                                <th>Preço</th>
+                                <th>Estoque</th>
+                                <th>Mínimo</th>
+                                <th>Validade</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaProdutos">
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            
+<section id="inventario" class="tela">
+    <div class="estoque-topo">
+        <div>
+            <h2>Inventário de Estoque</h2>
+            <p>Confira o estoque físico e ajuste divergências com segurança.</p>
+        </div>
+        <button class="botao-principal" id="btnIniciarInventario">+ Novo Inventário</button>
+    </div>
+
+    <div class="inventario-resumo" id="inventarioResumo" style="display:none;">
+        <div class="card"><div class="card-topo"><span>Produtos</span><div class="icone-card">📦</div></div><strong id="invTotal">0</strong><small>itens para conferir</small></div>
+        <div class="card"><div class="card-topo"><span>Conferidos</span><div class="icone-card">✓</div></div><strong id="invConferidos">0</strong><small>contagens salvas</small></div>
+        <div class="card"><div class="card-topo"><span>Divergências</span><div class="icone-card">⚠️</div></div><strong id="invDivergencias">0</strong><small>estoque diferente</small></div>
+        <div class="card"><div class="card-topo"><span>Pendentes</span><div class="icone-card">…</div></div><strong id="invPendentes">0</strong><small>ainda não contados</small></div>
+    </div>
+
+    <div class="painel inventario-andamento" id="inventarioAndamento" style="display:none;">
+        <div class="painel-header inventario-header">
+            <div>
+                <h2 id="inventarioTitulo">Inventário em andamento</h2>
+                <p>Digite a quantidade física encontrada. A contagem é salva ao sair do campo.</p>
+            </div>
+            <div class="inventario-acoes">
+                <button class="botao-secundario" id="btnCancelarInventario">Cancelar</button>
+                <button class="botao-principal" id="btnFinalizarInventario">Finalizar e ajustar estoque</button>
+            </div>
+        </div>
+        <div class="estoque-filtros">
+            <input type="text" id="pesquisaInventario" placeholder="Pesquisar produto...">
+            <select id="filtroInventario">
+                <option value="todos">Todos</option>
+                <option value="pendentes">Pendentes</option>
+                <option value="divergentes">Com divergência</option>
+                <option value="corretos">Corretos</option>
+            </select>
+        </div>
+        <div class="tabela-container">
+            <table class="tabela tabela-inventario">
+                <thead><tr><th>Produto</th><th>Estoque do sistema</th><th>Contagem física</th><th>Diferença</th><th>Status</th></tr></thead>
+                <tbody id="tabelaInventario"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="painel inventario-vazio" id="inventarioVazio">
+        <span>📋</span>
+        <h2>Nenhum inventário em andamento</h2>
+        <p>Inicie uma nova conferência para comparar o estoque físico com o sistema.</p>
+    </div>
+
+    <div class="painel inventario-historico">
+        <div class="painel-header">
+            <div><h2>Histórico de inventários</h2><p>Últimas conferências realizadas.</p></div>
+        </div>
+        <div class="tabela-container">
+            <table class="tabela">
+                <thead><tr><th>#</th><th>Responsável</th><th>Status</th><th>Produtos</th><th>Divergências</th><th>Ajuste líquido</th><th>Data</th><th></th></tr></thead>
+                <tbody id="tabelaHistoricoInventario"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section id="comandas" class="tela">
+    <div class="comandas-page">
+        <div class="estoque-topo comandas-topo">
+            <div>
+                <h2>Comandas</h2>
+                <p>Deixe o consumo em aberto e receba tudo no final.</p>
+            </div>
+            <button class="botao-principal" id="btnFocarNovaComanda" type="button">+ Nova comanda</button>
+        </div>
+
+        <div class="comandas-resumo">
+            <div class="comanda-kpi"><span>Em aberto</span><strong id="comandasAbertasQtd">0</strong></div>
+            <div class="comanda-kpi"><span>Valor em aberto</span><strong id="comandasAbertasValor">R$ 0,00</strong></div>
+            <div class="comanda-kpi"><span>Itens consumidos</span><strong id="comandasAbertasItens">0</strong></div>
+        </div>
+
+        <div class="painel comanda-nova-card">
+            <div class="painel-header">
+                <div>
+                    <h2>Abrir nova comanda</h2>
+                    <p>Use nome do cliente, mesa, número ou qualquer identificação rápida.</p>
+                </div>
+            </div>
+            <form id="formNovaComanda" class="comanda-nova-form">
+                <div class="campo">
+                    <label>Identificação *</label>
+                    <input id="novaComandaNome" type="text" maxlength="80" required placeholder="Ex.: João, Mesa 4, Comanda 27">
+                </div>
+                <div class="campo comanda-observacao-campo">
+                    <label>Observação</label>
+                    <input id="novaComandaObservacao" type="text" maxlength="250" placeholder="Opcional">
+                </div>
+                <button class="botao-principal" type="submit">Abrir comanda</button>
+            </form>
+        </div>
+
+        <div class="comandas-lista-cabecalho">
+            <div>
+                <h3>Comandas abertas</h3>
+                <small>O estoque dos itens adicionados já fica reservado.</small>
+            </div>
+            <button class="botao-secundario" id="btnAtualizarComandas" type="button">↻ Atualizar</button>
+        </div>
+
+        <div class="comandas-grid" id="listaComandas">
+            <div class="estado-vazio">Carregando comandas...</div>
+        </div>
+    </div>
+</section>
+
+<section id="pdv" class="tela">
+
+    <div class="pdv-layout">
+
+        <div class="pdv-produtos">
+
+            <div class="pdv-topo">
+                <div>
+                    <h2>Nova Venda</h2>
+                    <p>Pesquise por nome ou código de barras.</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="pdv-atalhos-botao"
+                    id="btnMostrarAtalhosPDV"
+                    title="Ver atalhos do PDV"
+                >
+                    <span>⌨</span>
+                    Atalhos
+                </button>
+            </div>
+
+            <div class="pdv-atalhos-faixa" id="pdvAtalhosFaixa">
+                <span><kbd>F2</kbd> Buscar</span>
+                <span><kbd>F3</kbd> Carrinho</span>
+                <span><kbd>↑ ↓</kbd> Navegar</span>
+                <span><kbd>+ −</kbd> Quantidade</span>
+                <span><kbd>Del</kbd> Remover</span>
+                <span><kbd>F5</kbd> Desconto</span>
+                <span><kbd>F6</kbd> Pagamento</span>
+                <span><kbd>F7</kbd> Recebido</span>
+                <span><kbd>F4</kbd> Finalizar</span>
+            </div>
+
+            <div class="pdv-pesquisa-linha">
+                <div class="pdv-pesquisa">
+                    <span class="pdv-pesquisa-icone">⌕</span>
+                    <input
+                        type="text"
+                        id="pesquisaPDV"
+                        placeholder="Digite nome, código de barras ou categoria..."
+                        autocomplete="off"
+                    >
+                    <button type="button" class="pdv-limpar-pesquisa" id="btnLimparPesquisaPDV" title="Limpar pesquisa">×</button>
+                </div>
+
+                <button type="button" class="botao-secundario pdv-repetir-venda" id="btnRepetirUltimaVenda">
+                    ↻ Repetir última venda
+                </button>
+            </div>
+
+            <div class="pdv-destaques" id="pdvDestaques">
+                <div class="pdv-destaques-topo">
+                    <div>
+                        <h3>Favoritos e mais vendidos</h3>
+                        <small>Acesso rápido aos produtos usados com mais frequência</small>
+                    </div>
+                </div>
+                <div class="pdv-destaques-lista" id="listaDestaquesPDV"></div>
+            </div>
+
+            <div class="pdv-resultados-info">
+                <span id="contadorResultadosPDV">0 produtos</span>
+                <small>Enter em um código de barras exato adiciona o produto automaticamente.</small>
+            </div>
+
+            <div
+                class="pdv-lista-produtos"
+                id="listaProdutosPDV"
+            >
+            </div>
+
+        </div>
+
+
+        <div class="pdv-carrinho">
+
+            <div class="painel">
+
+                <div class="painel-header">
+                    <div>
+                        <h2>Carrinho</h2>
+                        <p id="quantidadeItensCarrinho">
+                            0 itens
+                        </p>
+                    </div>
+
+                    <button
+                        class="botao-secundario"
+                        id="btnLimparCarrinho"
+                    >
+                        Limpar
+                    </button>
+                </div>
+
+                <div class="comanda-pdv-banner" id="comandaAtivaBanner" style="display:none;">
+                    <div class="comanda-pdv-banner-icone">⌁</div>
+                    <div class="comanda-pdv-banner-info">
+                        <small>COMANDA ATIVA</small>
+                        <strong id="comandaAtivaNome">—</strong>
+                        <span id="comandaAtivaResumo">0 itens • R$ 0,00 já consumidos</span>
+                    </div>
+                    <button class="botao-secundario" id="btnSairComandaPDV" type="button">Sair</button>
+                </div>
+
+
+                <div
+                    class="carrinho-itens"
+                    id="carrinhoItens"
+                >
+                    <div class="carrinho-vazio">
+                        Nenhum produto adicionado.
+                    </div>
+                </div>
+
+
+                <div class="pdv-configuracoes">
+
+                    <div class="campo">
+                        <label>Tipo de venda</label>
+
+                        <select id="tipoVendaPDV">
+                        </select>
+                    </div>
+
+
+                    <div class="campo">
+                        <label>Desconto</label>
+
+                        <input
+                            type="number"
+                            id="descontoPDV"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                        >
+                    </div>
+                    <div class="campo campo-pagamento-principal">
+                        <label>Forma de pagamento</label>
+                        <select id="formaPagamentoPDV">
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="pix">Pix</option>
+                            <option value="debito">Cartão de Débito</option>
+                            <option value="credito">Cartão de Crédito</option>
+                        </select>
+                    </div>
+
+                    <div class="campo campo-pagamento-dividido-toggle">
+                        <label class="check-pagamento-dividido">
+                            <input type="checkbox" id="usarPagamentoDivididoPDV">
+                            <span>Dividir em 2 formas de pagamento</span>
+                        </label>
+                        <small>Ex.: parte no Pix e o restante em Dinheiro.</small>
+                    </div>
+
+                    <div class="pagamento-dividido-box" id="pagamentoDivididoBoxPDV" style="display:none;">
+                        <div class="pagamento-dividido-grid">
+                            <div class="campo">
+                                <label>Valor na 1ª forma</label>
+                                <input type="number" id="valorPrimeiroPagamentoPDV" min="0" step="0.01" placeholder="0,00">
+                                <small>Informe quanto será pago na primeira forma.</small>
+                            </div>
+
+                            <div class="campo">
+                                <label>2ª forma de pagamento</label>
+                                <select id="segundaFormaPagamentoPDV">
+                                    <option value="pix">Pix</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                    <option value="debito">Cartão de Débito</option>
+                                    <option value="credito">Cartão de Crédito</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Valor na 2ª forma</label>
+                                <input type="text" id="valorSegundoPagamentoPDV" value="R$ 0,00" readonly>
+                                <small>O restante é calculado automaticamente.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="campo" id="campoValorRecebido">
+                        <label id="labelValorRecebidoPDV">Valor recebido em dinheiro</label>
+                        <input type="number" id="valorRecebidoPDV" min="0" step="0.01" placeholder="0,00">
+                        <small id="ajudaValorRecebidoPDV">Informe quanto o cliente entregou em dinheiro.</small>
+                    </div>
+
+                </div>
+
+
+                <div class="pdv-resumo">
+
+                    <div>
+                        <span>Subtotal</span>
+                        <strong id="subtotalPDV">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Desconto</span>
+                        <strong id="descontoResumoPDV">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+                    <div class="pdv-total">
+                        <span>Total</span>
+                        <strong id="totalPDV">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+                    <div
+                        class="pdv-troco"
+                        id="linhaTrocoPDV"
+                    >
+                        <span>Troco</span>
+                        <strong id="trocoPDV">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="botao-finalizar-venda"
+                    id="btnFinalizarVenda"
+                >
+                    Finalizar Venda
+                </button>
+
+                <button class="botao-secundario botao-comanda-pdv" id="btnGuardarComandaPDV" type="button">
+                    ⌁ Guardar em comanda
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- CAIXA -->
+            <section id="caixa" class="tela">
+
+                <div class="estoque-topo">
+                    <div>
+                        <h2>Controle de Caixa</h2>
+                        <p>Abertura, movimentações e fechamento.</p>
+                    </div>
+
+                    <button class="botao-principal" id="btnAbrirCaixa">
+                        Abrir Caixa
+                    </button>
+                </div>
+
+
+                <div class="cards-dashboard">
+
+                    <div class="card">
+                        <div class="card-topo">
+                            <span>Valor inicial</span>
+                            <div class="icone-card">💵</div>
+                        </div>
+
+                        <strong id="caixaValorInicial">
+                            R$ 0,00
+                        </strong>
+
+                        <small>fundo de caixa</small>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-topo">
+                            <span>Vendas</span>
+                            <div class="icone-card">🛒</div>
+                        </div>
+
+                        <strong id="caixaTotalVendas">
+                            R$ 0,00
+                        </strong>
+
+                        <small>total vendido</small>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-topo">
+                            <span>Dinheiro esperado</span>
+                            <div class="icone-card">💰</div>
+                        </div>
+
+                        <strong id="caixaDinheiroEsperado">
+                            R$ 0,00
+                        </strong>
+
+                        <small>valor físico esperado</small>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-topo">
+                            <span>Status</span>
+                            <div class="icone-card">🔐</div>
+                        </div>
+
+                        <strong id="caixaStatusCard">
+                            Fechado
+                        </strong>
+
+                        <small id="caixaDataAbertura">
+                            nenhum caixa aberto
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <div class="painel">
+
+                        <div class="painel-header">
+                            <div>
+                                <h2>Formas de pagamento</h2>
+                                <p>Resumo das vendas do caixa atual</p>
+                            </div>
+                        </div>
+
+
+                        <div class="resumo-lista">
+
+                            <div class="resumo-item">
+                                <span>💵 Dinheiro</span>
+
+                                <strong id="caixaDinheiro">
+                                    R$ 0,00
+                                </strong>
+                            </div>
+
+                            <div class="resumo-item">
+                                <span>📱 Pix</span>
+
+                                <strong id="caixaPix">
+                                    R$ 0,00
+                                </strong>
+                            </div>
+
+                            <div class="resumo-item">
+                                <span>💳 Débito</span>
+
+                                <strong id="caixaDebito">
+                                    R$ 0,00
+                                </strong>
+                            </div>
+
+                            <div class="resumo-item">
+                                <span>💳 Crédito</span>
+
+                                <strong id="caixaCredito">
+                                    R$ 0,00
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="painel">
+
+                        <div class="painel-header">
+                            <div>
+                                <h2>Movimentações</h2>
+                                <p>Entradas e retiradas manuais</p>
+                            </div>
+                        </div>
+
+
+                        <div class="acoes-caixa">
+
+                            <button
+                                class="botao-caixa entrada"
+                                id="btnSuprimento"
+                            >
+                                <span>+</span>
+
+                                <div>
+                                    <strong>Suprimento</strong>
+                                    <small>Adicionar dinheiro</small>
+                                </div>
+                            </button>
+
+
+                            <button
+                                class="botao-caixa saida"
+                                id="btnSangria"
+                            >
+                                <span>−</span>
+
+                                <div>
+                                    <strong>Sangria</strong>
+                                    <small>Retirar dinheiro</small>
+                                </div>
+                            </button>
+
+
+                            <button
+                                class="botao-caixa fechar"
+                                id="btnFecharCaixa"
+                            >
+                                <span>🔒</span>
+
+                                <div>
+                                    <strong>Fechar Caixa</strong>
+                                    <small>Conferir valores</small>
+                                </div>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="painel painel-movimentacoes-caixa">
+
+                    <div class="painel-header">
+                        <div>
+                            <h2>Movimentações do caixa</h2>
+                            <p>Histórico do caixa atual</p>
+                        </div>
+                    </div>
+
+                    <div class="tabela-container">
+
+                        <table class="tabela">
+
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tabelaMovimentacoesCaixa">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FECHAMENTO MENSAL -->
+            <section id="fechamentoMensal" class="tela">
+                <div class="estoque-topo fechamento-mensal-topo">
+                    <div>
+                        <h2>Fechamento Mensal</h2>
+                        <p>Consolidação financeira e operacional do mês.</p>
+                    </div>
+                    <div class="fechamento-mensal-filtro">
+                        <div class="campo">
+                            <label>Mês</label>
+                            <input type="month" id="fechamentoMes">
+                        </div>
+                        <button type="button" class="botao-principal" id="btnGerarFechamentoMensal">Gerar fechamento</button>
+                    </div>
+                </div>
+
+                <div class="fechamento-periodo">
+                    <span>Período analisado</span>
+                    <strong id="fechamentoMensalTitulo">—</strong>
+                </div>
+
+                <div class="fechamento-cards">
+                    <div class="card"><div class="card-topo"><span>Faturamento</span><div class="icone-card">💰</div></div><strong id="fmFaturamento">R$ 0,00</strong><small id="fmVendas">0 vendas</small></div>
+                    <div class="card"><div class="card-topo"><span>Lucro bruto</span><div class="icone-card">📈</div></div><strong id="fmLucro">R$ 0,00</strong><small id="fmMargem">Margem: 0,00%</small></div>
+                    <div class="card"><div class="card-topo"><span>Custo mercadoria</span><div class="icone-card">📦</div></div><strong id="fmCusto">R$ 0,00</strong><small>CMV do mês</small></div>
+                    <div class="card fm-perdas"><div class="card-topo"><span>Perdas</span><div class="icone-card">📉</div></div><strong id="fmPerdas">R$ 0,00</strong><small id="fmPerdasQtd">0 unidades</small></div>
+                    <div class="card fm-resultado"><div class="card-topo"><span>Resultado após perdas</span><div class="icone-card">✓</div></div><strong id="fmResultado">R$ 0,00</strong><small>lucro bruto − perdas</small></div>
+                    <div class="card"><div class="card-topo"><span>Ticket médio</span><div class="icone-card">🧾</div></div><strong id="fmTicket">R$ 0,00</strong><small id="fmDescontos">R$ 0,00 em descontos</small></div>
+                </div>
+
+                <div class="fechamento-grid">
+                    <div class="painel fechamento-painel">
+                        <div class="painel-header"><div><h2>Formas de pagamento</h2><p>Total recebido por meio de pagamento.</p></div></div>
+                        <div class="fm-pagamentos">
+                            <div><span>💵 Dinheiro</span><strong id="fmDinheiro">R$ 0,00</strong></div>
+                            <div><span>⚡ Pix</span><strong id="fmPix">R$ 0,00</strong></div>
+                            <div><span>💳 Débito</span><strong id="fmDebito">R$ 0,00</strong></div>
+                            <div><span>💳 Crédito</span><strong id="fmCredito">R$ 0,00</strong></div>
+                            <div><span>➕ Outros</span><strong id="fmOutros">R$ 0,00</strong></div>
+                        </div>
+                    </div>
+                    <div class="painel fechamento-painel">
+                        <div class="painel-header"><div><h2>Resumo do mês</h2><p>Principais números consolidados.</p></div></div>
+                        <div class="fm-resumo">
+                            <div><span>Vendas finalizadas</span><strong id="fmResumoVendas">0</strong></div>
+                            <div><span>Faturamento</span><strong id="fmResumoFat">R$ 0,00</strong></div>
+                            <div><span>Descontos</span><strong id="fmResumoDesc">R$ 0,00</strong></div>
+                            <div><span>Custo de mercadoria</span><strong id="fmResumoCusto">R$ 0,00</strong></div>
+                            <div><span>Perdas</span><strong id="fmResumoPerdas">R$ 0,00</strong></div>
+                            <div class="fm-resumo-final"><span>Resultado após perdas</span><strong id="fmResumoResultado">R$ 0,00</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="painel fechamento-painel">
+                    <div class="painel-header"><div><h2>Faturamento por dia</h2><p>Movimento diário do mês selecionado.</p></div></div>
+                    <div id="fmGrafico" class="fm-grafico"><div class="dashboard-vazio">Selecione um mês para gerar o fechamento.</div></div>
+                </div>
+            </section>
+
+            <!-- RELATÓRIOS -->
+            <section id="relatorios" class="tela">
+
+                <!-- =====================================
+     RELATÓRIO DE LUCRO
+====================================== -->
+
+<div class="lucro-area">
+
+    <div class="lucro-cabecalho">
+
+        <div>
+            <h2>Desempenho financeiro</h2>
+            <p>
+                Faturamento, custos e lucro das vendas.
+            </p>
+        </div>
+
+        <button
+            class="botao-secundario"
+            id="btnAtualizarLucro"
+        >
+            ↻ Atualizar
+        </button>
+
+    </div>
+
+
+    <!-- CARDS -->
+
+    <div class="lucro-cards">
+
+        <div class="lucro-card">
+
+            <div class="lucro-card-topo">
+                <span>Faturamento</span>
+                <span class="lucro-card-icone">
+                    💰
+                </span>
+            </div>
+
+            <strong id="lucroFaturamento">
+                R$ 0,00
+            </strong>
+
+            <small>
+                Total vendido hoje
+            </small>
+
+        </div>
+
+
+        <div class="lucro-card">
+
+            <div class="lucro-card-topo">
+                <span>Custo</span>
+                <span class="lucro-card-icone">
+                    📦
+                </span>
+            </div>
+
+            <strong id="lucroCusto">
+                R$ 0,00
+            </strong>
+
+            <small>
+                Custo dos produtos vendidos
+            </small>
+
+        </div>
+
+
+        <div class="lucro-card destaque">
+
+            <div class="lucro-card-topo">
+                <span>Lucro bruto</span>
+
+                <span class="lucro-card-icone">
+                    📈
+                </span>
+            </div>
+
+            <strong id="lucroBruto">
+                R$ 0,00
+            </strong>
+
+            <small>
+                Faturamento menos custo
+            </small>
+
+        </div>
+
+
+        <div class="lucro-card">
+
+            <div class="lucro-card-topo">
+                <span>Margem</span>
+
+                <span class="lucro-card-icone">
+                    %
+                </span>
+            </div>
+
+            <strong id="lucroMargem">
+                0,00%
+            </strong>
+
+            <small>
+                Margem bruta das vendas
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- FILTRO -->
+
+    <div class="painel lucro-periodo">
+
+        <div class="lucro-periodo-topo">
+
+            <div>
+                <h3>Consultar período</h3>
+
+                <p>
+                    Consulte o desempenho entre duas datas.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="lucro-filtros">
+
+            <div class="campo">
+                <label>
+                    Data inicial
+                </label>
+
+                <input
+                    type="date"
+                    id="lucroDataInicio"
+                >
+            </div>
+
+
+            <div class="campo">
+                <label>
+                    Data final
+                </label>
+
+                <input
+                    type="date"
+                    id="lucroDataFim"
+                >
+            </div>
+
+
+            <button
+                class="botao-principal"
+                id="btnConsultarLucro"
+            >
+                Consultar
+            </button>
+
+        </div>
+
+
+        <div
+            class="lucro-periodo-resultado"
+            id="lucroPeriodoResultado"
+        >
+
+            <div>
+                <span>Vendas</span>
+                <strong id="lucroPeriodoVendas">
+                    0
+                </strong>
+            </div>
+
+            <div>
+                <span>Faturamento</span>
+                <strong id="lucroPeriodoFaturamento">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div>
+                <span>Custo</span>
+                <strong id="lucroPeriodoCusto">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div>
+                <span>Lucro</span>
+                <strong id="lucroPeriodoLucro">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div>
+                <span>Margem</span>
+                <strong id="lucroPeriodoMargem">
+                    0,00%
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUTOS MAIS LUCRATIVOS -->
+
+    <div class="painel lucro-ranking">
+
+        <div class="painel-header">
+
+            <div>
+                <h2>
+                    Produtos mais lucrativos
+                </h2>
+
+                <p>
+                    Ranking das vendas realizadas hoje
+                </p>
+            </div>
+
+        </div>
+
+
+        <div
+            id="listaProdutosLucrativos"
+            class="lista-produtos-lucrativos"
+        >
+
+            <div class="lucro-vazio">
+                Nenhuma venda encontrada hoje.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+                <div class="relatorios-cabecalho">
+    <div>
+        <h2>Relatórios</h2>
+        <p>Visão geral das vendas e do estoque de hoje.</p>
+    </div>
+
+    <button
+        class="botao-secundario"
+        id="btnAtualizarRelatorios"
+    >
+        ↻ Atualizar dados
+    </button>
+</div>
+
+
+<!-- CARDS -->
+
+<div class="relatorios-cards">
+
+    <div class="relatorio-card">
+        <span>Faturamento hoje</span>
+
+        <strong id="relatorioFaturamento">
+            R$ 0,00
+        </strong>
+
+        <small>Vendas finalizadas</small>
+    </div>
+
+
+    <div class="relatorio-card">
+        <span>Vendas hoje</span>
+
+        <strong id="relatorioQuantidadeVendas">
+            0
+        </strong>
+
+        <small>Quantidade de vendas</small>
+    </div>
+
+
+    <div class="relatorio-card">
+        <span>Ticket médio</span>
+
+        <strong id="relatorioTicketMedio">
+            R$ 0,00
+        </strong>
+
+        <small>Média por venda</small>
+    </div>
+
+
+    <div class="relatorio-card relatorio-card-alerta">
+        <span>Cancelamentos</span>
+
+        <strong id="relatorioCanceladas">
+            0
+        </strong>
+
+        <small>Vendas canceladas hoje</small>
+    </div>
+
+</div>
+
+
+<!-- PAGAMENTOS / TIPOS -->
+
+<div class="relatorios-grid">
+
+    <div class="painel relatorio-painel">
+
+        <div class="relatorio-painel-titulo">
+            <div>
+                <h3>Formas de pagamento</h3>
+                <p>Faturamento por método</p>
+            </div>
+
+            <span>Hoje</span>
+        </div>
+
+        <div id="relatorioPagamentos">
+        </div>
+
+    </div>
+
+
+    <div class="painel relatorio-painel">
+
+        <div class="relatorio-painel-titulo">
+            <div>
+                <h3>Tipos de venda</h3>
+                <p>Origem das vendas realizadas</p>
+            </div>
+
+            <span>Hoje</span>
+        </div>
+
+        <div id="relatorioTiposVenda">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PRODUTOS / ESTOQUE -->
+
+<div class="relatorios-grid">
+
+    <div class="painel relatorio-painel">
+
+        <div class="relatorio-painel-titulo">
+            <div>
+                <h3>Produtos mais vendidos</h3>
+                <p>Ranking por quantidade</p>
+            </div>
+
+            <span>Top 10</span>
+        </div>
+
+        <div id="relatorioProdutos">
+        </div>
+
+    </div>
+
+
+    <div class="painel relatorio-painel">
+
+        <div class="relatorio-painel-titulo">
+            <div>
+                <h3>Estoque baixo</h3>
+                <p>Produtos que precisam de atenção</p>
+            </div>
+
+            <span id="quantidadeEstoqueBaixo">
+                0
+            </span>
+        </div>
+
+        <div id="relatorioEstoqueBaixo">
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="painel relatorio-painel lista-compras-painel">
+
+    <div class="relatorio-painel-titulo">
+        <div>
+            <h3>🛒 Lista de compras</h3>
+            <p>Produtos físicos que precisam ser repostos</p>
+        </div>
+
+        <div class="lista-compras-acoes">
+            <span id="quantidadeListaCompras">0</span>
+
+            <button
+                type="button"
+                class="botao-secundario botao-lista-compras"
+                id="btnCopiarListaCompras"
+            >
+                Copiar lista
+            </button>
+        </div>
+    </div>
+
+    <div id="relatorioListaCompras">
+        <div class="relatorio-vazio">
+            Carregando lista...
+        </div>
+    </div>
+
+</div>
+
+
+    <div class="estoque-topo">
+        <div>
+            <h2>Histórico de Vendas</h2>
+            <p>Consulte, visualize e gerencie as vendas realizadas.</p>
+        </div>
+
+        <button
+            class="botao-secundario"
+            id="btnAtualizarVendas"
+        >
+            ↻ Atualizar
+        </button>
+    </div>
+
+    <div class="painel tabela-container">
+
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Venda</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody id="tabelaVendas">
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="paginacao-vendas">
+        <button id="btnPaginaAnterior" type="button">← Anterior</button>
+        <span id="infoPaginaVendas">Página 1 de 1</span>
+        <button id="btnProximaPagina" type="button">Próxima →</button>
+    </div>
+
+</section>
+
+
+
+            <!-- USUÁRIOS - SOMENTE ADMINISTRADOR -->
+            <section id="usuarios" class="tela">
+                <div class="estoque-topo">
+                    <div>
+                        <h2>Gerenciamento de Usuários</h2>
+                        <p>Cadastre funcionários e controle o acesso ao sistema.</p>
+                    </div>
+                    <button class="botao-principal" id="btnNovoUsuario">+ Novo usuário</button>
+                </div>
+
+                <div class="usuarios-resumo">
+                    <div class="usuario-resumo-card"><span>Total</span><strong id="usuariosTotal">0</strong></div>
+                    <div class="usuario-resumo-card"><span>Ativos</span><strong id="usuariosAtivos">0</strong></div>
+                    <div class="usuario-resumo-card"><span>Administradores</span><strong id="usuariosAdmins">0</strong></div>
+                    <div class="usuario-resumo-card"><span>Operadores</span><strong id="usuariosOperadores">0</strong></div>
+                </div>
+
+                <div class="painel tabela-container">
+                    <table class="tabela tabela-usuarios">
+                        <thead><tr><th>Nome</th><th>Usuário</th><th>Perfil</th><th>Status</th><th>Criado em</th><th>Ações</th></tr></thead>
+                        <tbody id="tabelaUsuarios"><tr><td colspan="6" class="usuarios-vazio">Carregando usuários...</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- AUDITORIA - SOMENTE ADMINISTRADOR -->
+            <section id="auditoria" class="tela">
+                <div class="estoque-topo">
+                    <div><h2>Log de Auditoria</h2><p>Acompanhe as ações realizadas pelos usuários do sistema.</p></div>
+                    <button class="botao-secundario" id="btnAtualizarAuditoria">↻ Atualizar</button>
+                </div>
+                <div class="painel" style="margin-bottom:16px;">
+                    <div class="form-grid">
+                        <div class="campo"><label>Usuário</label><select id="auditoriaUsuario"><option value="">Todos</option></select></div>
+                        <div class="campo"><label>Ação</label><select id="auditoriaAcao"><option value="">Todas</option></select></div>
+                        <div class="campo"><label>Data inicial</label><input type="date" id="auditoriaInicio"></div>
+                        <div class="campo"><label>Data final</label><input type="date" id="auditoriaFim"></div>
+                        <div class="campo campo-grande"><label>Buscar</label><input type="text" id="auditoriaBusca" placeholder="Descrição, usuário ou entidade..."></div>
+                        <div class="campo" style="justify-content:flex-end;"><label>&nbsp;</label><button class="botao-principal" id="btnFiltrarAuditoria" type="button">Filtrar</button></div>
+                    </div>
+                </div>
+                <div class="painel tabela-container">
+                    <table class="tabela"><thead><tr><th>Data</th><th>Usuário</th><th>Ação</th><th>Descrição</th><th>Referência</th></tr></thead>
+                    <tbody id="tabelaAuditoria"><tr><td colspan="5">Nenhum registro carregado.</td></tr></tbody></table>
+                </div>
+                <div class="paginacao-vendas">
+                    <button id="btnAuditoriaAnterior" type="button">← Anterior</button>
+                    <span id="infoPaginaAuditoria">Página 1 de 1</span>
+                    <button id="btnAuditoriaProxima" type="button">Próxima →</button>
+                </div>
+            </section>
+
+
+
+            <!-- CONFIGURAÇÕES - SOMENTE ADMINISTRADOR -->
+            <section id="configuracoes" class="tela">
+                <div class="estoque-topo">
+                    <div>
+                        <h2>Configurações da Adega</h2>
+                        <p>Centralize os dados da empresa, padrões de estoque e comportamento do PDV.</p>
+                    </div>
+                </div>
+
+                <form id="formConfiguracoes" class="configuracoes-completas">
+                    <div class="painel config-bloco">
+                        <div class="painel-header">
+                            <div>
+                                <h2>Identidade da adega</h2>
+                                <p>Informações exibidas no sistema.</p>
+                            </div>
+                        </div>
+
+                        <div class="config-logo-area">
+                            <div class="config-logo-preview" id="configLogoPreview">🍷</div>
+                            <div class="config-logo-botoes">
+                                <input type="file" id="configLogo" accept="image/png,image/jpeg,image/webp" hidden>
+                                <button type="button" class="botao-secundario" id="btnEscolherLogo">Escolher logo</button>
+                                <button type="button" class="botao-secundario" id="btnRemoverLogo">Remover</button>
+                                <small>PNG, JPG ou WEBP, até 2 MB.</small>
+                            </div>
+                        </div>
+
+                        <div class="config-form-grid">
+                            <div class="campo">
+                                <label>Nome da adega</label>
+                                <input type="text" id="configNomeAdega" maxlength="80" required>
+                            </div>
+
+                            <div class="campo">
+                                <label>Razão social</label>
+                                <input type="text" id="configRazaoSocial" maxlength="120" placeholder="Opcional">
+                            </div>
+
+                            <div class="campo">
+                                <label>CNPJ</label>
+                                <input type="text" id="configCnpj" maxlength="18" placeholder="00.000.000/0000-00">
+                            </div>
+
+                            <div class="campo">
+                                <label>Telefone</label>
+                                <input type="text" id="configTelefone" maxlength="25" placeholder="(11) 99999-9999">
+                            </div>
+
+                            <div class="campo campo-config-grande">
+                                <label>Subtítulo</label>
+                                <input type="text" id="configSubtitulo" maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="painel config-bloco">
+                        <div class="painel-header">
+                            <div>
+                                <h2>Endereço</h2>
+                                <p>Dados de localização da adega.</p>
+                            </div>
+                        </div>
+
+                        <div class="config-form-grid">
+                            <div class="campo campo-config-grande">
+                                <label>Endereço</label>
+                                <input type="text" id="configEndereco" maxlength="120" placeholder="Rua / Avenida">
+                            </div>
+
+                            <div class="campo">
+                                <label>Número</label>
+                                <input type="text" id="configNumero" maxlength="20">
+                            </div>
+
+                            <div class="campo">
+                                <label>Complemento</label>
+                                <input type="text" id="configComplemento" maxlength="60" placeholder="Opcional">
+                            </div>
+
+                            <div class="campo">
+                                <label>Bairro</label>
+                                <input type="text" id="configBairro" maxlength="80">
+                            </div>
+
+                            <div class="campo">
+                                <label>Cidade</label>
+                                <input type="text" id="configCidade" maxlength="80">
+                            </div>
+
+                            <div class="campo config-uf">
+                                <label>UF</label>
+                                <input type="text" id="configEstado" maxlength="2" placeholder="SP">
+                            </div>
+
+                            <div class="campo">
+                                <label>CEP</label>
+                                <input type="text" id="configCep" maxlength="10" placeholder="00000-000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="configuracoes-grid-duplo">
+                        <div class="painel config-bloco">
+                            <div class="painel-header">
+                                <div>
+                                    <h2>Estoque e relatórios</h2>
+                                    <p>Padrões usados no controle de produtos.</p>
+                                </div>
+                            </div>
+
+                            <div class="campo">
+                                <label>Estoque mínimo padrão</label>
+                                <input type="number" id="configEstoqueMinimo" min="0" step="1" value="0">
+                                <small>Preenchido automaticamente ao cadastrar um novo produto.</small>
+                            </div>
+
+                            <div class="campo">
+                                <label>Produto parado após</label>
+                                <div class="config-campo-unidade">
+                                    <input type="number" id="configDiasProdutoParado" min="1" max="3650" step="1" value="30">
+                                    <span>dias sem venda</span>
+                                </div>
+                                <small>Usado no Dashboard para identificar produtos encalhados.</small>
+                            </div>
+
+                            <div class="campo">
+                                <label>Tema padrão</label>
+                                <select id="configTema">
+                                    <option value="claro">Claro</option>
+                                    <option value="escuro">Escuro</option>
+                                </select>
+                                <small>Aplicado quando o navegador ainda não possui preferência salva.</small>
+                            </div>
+                        </div>
+
+                        <div class="painel config-bloco">
+                            <div class="painel-header">
+                                <div>
+                                    <h2>Configurações do PDV</h2>
+                                    <p>Defina como a tela de vendas deve funcionar.</p>
+                                </div>
+                            </div>
+
+                            <label class="config-switch-linha">
+                                <div>
+                                    <strong>Favoritos e mais vendidos</strong>
+                                    <small>Exibir produtos em destaque no topo do PDV.</small>
+                                </div>
+                                <input type="checkbox" id="configPdvDestaques">
+                                <span class="config-switch"></span>
+                            </label>
+
+                            <div class="campo" id="configGrupoQuantidadeDestaques">
+                                <label>Quantidade de destaques</label>
+                                <input type="number" id="configPdvQuantidadeDestaques" min="1" max="12" step="1" value="8">
+                            </div>
+
+                            <label class="config-switch-linha">
+                                <div>
+                                    <strong>Foco automático na busca</strong>
+                                    <small>Ao abrir o PDV, o cursor vai direto para a pesquisa.</small>
+                                </div>
+                                <input type="checkbox" id="configPdvFocoBusca">
+                                <span class="config-switch"></span>
+                            </label>
+
+                            <label class="config-switch-linha">
+                                <div>
+                                    <strong>Permitir desconto</strong>
+                                    <small>Autoriza informar desconto durante a venda.</small>
+                                </div>
+                                <input type="checkbox" id="configPdvPermitirDesconto">
+                                <span class="config-switch"></span>
+                            </label>
+
+                            <div class="campo" id="configGrupoDescontoMaximo">
+                                <label>Desconto máximo</label>
+                                <div class="config-campo-unidade">
+                                    <input type="number" id="configPdvDescontoMaximo" min="0" max="100" step="0.01" value="100">
+                                    <span>% do subtotal</span>
+                                </div>
+                                <small>Também é validado no servidor; não pode ser burlado apenas alterando a tela.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="configuracoes-acoes configuracoes-acoes-fixas">
+                        <div>
+                            <strong>Alterações administrativas</strong>
+                            <small>As mudanças desta tela ficam registradas na Auditoria.</small>
+                        </div>
+                        <button type="submit" class="botao-principal">
+                            Salvar configurações
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+
+            <!-- SISTEMA - SOMENTE ADMINISTRADOR -->
+            <section id="sistema" class="tela">
+
+                <div class="estoque-topo">
+                    <div>
+                        <h2>Sistema</h2>
+                        <p>Backup, restauração, diagnóstico e informações da instalação.</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="botao-secundario"
+                        id="btnAtualizarSistema"
+                    >
+                        ↻ Atualizar status
+                    </button>
+                </div>
+
+
+                <div class="sistema-resumo">
+
+                    <div class="painel sistema-status-card">
+                        <span class="sistema-status-icone">🟢</span>
+                        <div>
+                            <small>Servidor</small>
+                            <strong id="sistemaServidorStatus">Verificando...</strong>
+                            <span id="sistemaServidorDetalhe">—</span>
+                        </div>
+                    </div>
+
+                    <div class="painel sistema-status-card">
+                        <span class="sistema-status-icone">🗃️</span>
+                        <div>
+                            <small>Banco de dados</small>
+                            <strong id="sistemaBancoStatus">Verificando...</strong>
+                            <span id="sistemaBancoDetalhe">—</span>
+                        </div>
+                    </div>
+
+                    <div class="painel sistema-status-card">
+                        <span class="sistema-status-icone">💾</span>
+                        <div>
+                            <small>Último backup</small>
+                            <strong id="sistemaBackupStatus">Verificando...</strong>
+                            <span id="sistemaBackupDetalhe">—</span>
+                        </div>
+                    </div>
+
+                    <div class="painel sistema-status-card">
+                        <span class="sistema-status-icone">🏷️</span>
+                        <div>
+                            <small>Versão</small>
+                            <strong id="sistemaVersao">Adega PDV 2.1.7</strong>
+                            <span id="sistemaModo">WebView2 local</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="sistema-grid">
+
+                    <div class="painel sistema-bloco">
+
+                        <div class="sistema-bloco-cabecalho">
+                            <div>
+                                <h3>💾 Backup e restauração</h3>
+                                <p>Proteja todos os dados da adega sem sair do aplicativo.</p>
+                            </div>
+                        </div>
+
+                        <div class="sistema-acao">
+
+                            <div>
+                                <strong>Criar backup agora</strong>
+                                <p>
+                                    Gera uma cópia completa e consistente do banco de dados.
+                                </p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="botao-principal"
+                                id="btnCriarBackup"
+                            >
+                                Baixar backup
+                            </button>
+
+                        </div>
+
+                        <div class="sistema-acao sistema-acao-perigo">
+
+                            <div>
+                                <strong>Restaurar um backup</strong>
+                                <p>
+                                    Substitui os dados atuais por um arquivo .db anterior.
+                                    Antes disso, o sistema cria uma cópia de segurança.
+                                </p>
+                            </div>
+
+                            <input
+                                type="file"
+                                id="arquivoBackup"
+                                accept=".db"
+                                hidden
+                            >
+
+                            <button
+                                type="button"
+                                class="botao-secundario"
+                                id="btnSelecionarBackup"
+                            >
+                                Escolher backup
+                            </button>
+
+                        </div>
+
+                        <div class="sistema-acao">
+
+                            <div>
+                                <strong>Backups automáticos</strong>
+                                <p>
+                                    O sistema cria automaticamente um backup por dia e mantém
+                                    até 30 cópias recentes.
+                                </p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="botao-secundario"
+                                id="btnAbrirPastaBackups"
+                            >
+                                Abrir pasta
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="painel sistema-bloco">
+
+                        <div class="sistema-bloco-cabecalho">
+                            <div>
+                                <h3>🔑 Licenciamento</h3>
+                                <p>Consulte ou substitua a chave de uso desta instalação.</p>
+                            </div>
+                        </div>
+
+                        <div class="sistema-acao">
+                            <div>
+                                <strong id="sistemaLicencaStatus">Verificando licença...</strong>
+                                <p id="sistemaLicencaDetalhe">—</p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="botao-principal"
+                                id="btnTrocarLicenca"
+                            >
+                                Trocar licença
+                            </button>
+                        </div>
+
+                        <div class="sistema-acao">
+                            <div>
+                                <strong>Código da instalação</strong>
+                                <p id="sistemaInstalacaoId">—</p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="botao-secundario"
+                                id="btnCopiarInstalacaoSistema"
+                            >
+                                Copiar código
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <div class="painel sistema-bloco">
+
+                        <div class="sistema-bloco-cabecalho">
+                            <div>
+                                <h3>🩺 Diagnóstico</h3>
+                                <p>Informações úteis para conferir se o PDV está funcionando corretamente.</p>
+                            </div>
+                        </div>
+
+                        <div class="sistema-diagnostico-lista">
+
+                            <div>
+                                <span>Versão do aplicativo</span>
+                                <strong id="diagVersaoApp">2.1.7</strong>
+                            </div>
+
+                            <div>
+                                <span>Licença</span>
+                                <strong id="diagLicenca">Verificando...</strong>
+                            </div>
+
+                            <div>
+                                <span>Validade da licença</span>
+                                <strong id="diagLicencaValidade">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Código da instalação</span>
+                                <strong id="diagInstalacaoId">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Node.js</span>
+                                <strong id="diagNode">—</strong>
+                            </div>
+
+                            <div>
+                                <span>SQLite</span>
+                                <strong id="diagSQLite">—</strong>
+                            </div>
+
+                            <div>
+                                <span>WebView2</span>
+                                <strong id="diagWebView">Verificando...</strong>
+                            </div>
+
+                            <div>
+                                <span>Tempo do servidor</span>
+                                <strong id="diagUptime">—</strong>
+                            </div>
+
+                            <div>
+                                <span>Total de backups</span>
+                                <strong id="diagBackups">—</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="painel sistema-atualizacao">
+
+                    <div class="sistema-atualizacao-cabecalho">
+                        <div class="sistema-atualizacao-icone">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+                        </div>
+                        <div>
+                            <h3>Atualização do Adega PDV</h3>
+                            <p>
+                                Selecione somente <strong>AdegaPDV-Atualizacao-*.zip</strong>. Não use “Projeto Completo” nem “Patch”.
+                                O banco será preservado e receberá um backup antes da instalação.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="sistema-atualizacao-corpo">
+
+                        <input
+                            type="file"
+                            id="arquivoAtualizacao"
+                            accept=".zip,application/zip"
+                            hidden
+                        >
+
+                        <div class="atualizacao-arquivo" id="atualizacaoArquivoInfo">
+                            <span class="atualizacao-arquivo-icone">
+                                <svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5M9 13h6M9 17h6"/></svg>
+                            </span>
+
+                            <div>
+                                <strong id="atualizacaoNomeArquivo">Nenhum pacote selecionado</strong>
+                                <small id="atualizacaoDetalheArquivo">
+                                    Gere pelo CRIAR-PACOTE-ATUALIZACAO.bat ou CRIAR-ATUALIZACAO-WEBAPP.bat.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="atualizacao-acoes">
+                            <button
+                                type="button"
+                                class="botao-secundario"
+                                id="btnSelecionarAtualizacao"
+                            >
+                                Selecionar pacote
+                            </button>
+
+                            <button
+                                type="button"
+                                class="botao-principal"
+                                id="btnAplicarAtualizacao"
+                                disabled
+                            >
+                                Aplicar e reiniciar
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="atualizacao-seguranca">
+                        <span>✓ Backup automático antes de atualizar</span>
+                        <span>✓ Banco e backups não são substituídos</span>
+                        <span>✓ Reinício automático pelo WebView2</span>
+                    </div>
+
+                </div>
+
+
+                <div class="painel sistema-local">
+
+                    <div>
+                        <h3>📍 Instalação local</h3>
+                        <p>
+                            O Adega PDV roda somente neste computador por padrão.
+                            Seus dados ficam armazenados localmente.
+                        </p>
+                    </div>
+
+                    <div class="sistema-local-info">
+                        <span>Endereço do servidor</span>
+                        <strong id="diagEndereco">127.0.0.1:3000</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div class="modal-overlay" id="modalPlanilhaEstoque">
+        <div class="modal modal-planilha">
+
+            <div class="modal-header">
+                <div>
+                    <h2>Importar / Exportar estoque</h2>
+                    <p>Atualize produtos em lote ou gere uma planilha para trabalhar no Excel.</p>
+                </div>
+
+                <button
+                    class="modal-fechar"
+                    id="fecharModalPlanilha"
+                    type="button"
+                    aria-label="Fechar"
+                >
+                    ×
+                </button>
+            </div>
+
+            <div class="planilha-grid">
+
+                <div class="planilha-card">
+                    <div class="planilha-card-icone azul">
+                        <svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+                    </div>
+
+                    <div>
+                        <h3>Exportar produtos</h3>
+                        <p>
+                            Gera todos os produtos, preços e quantidades atuais.
+                            O arquivo pode ser editado e importado novamente.
+                        </p>
+                    </div>
+
+                    <div class="planilha-botoes">
+                        <button class="botao-secundario" id="btnExportarCsv" type="button">
+                            CSV
+                        </button>
+                        <button class="botao-principal" id="btnExportarExcel" type="button">
+                            Excel
+                        </button>
+                    </div>
+                </div>
+
+                <div class="planilha-card">
+                    <div class="planilha-card-icone verde">
+                        <svg viewBox="0 0 24 24"><path d="M12 20V9M7 14l5-5 5 5"/><path d="M5 4h14"/></svg>
+                    </div>
+
+                    <div>
+                        <h3>Importar planilha</h3>
+                        <p>
+                            Produtos existentes são identificados pelo código de barras
+                            ou nome. Alterações de quantidade são registradas no histórico.
+                        </p>
+                    </div>
+
+                    <input
+                        type="file"
+                        id="arquivoPlanilhaEstoque"
+                        accept=".csv,.xls,.xlsx,.xml,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        hidden
+                    >
+
+                    <button class="botao-principal" id="btnImportarPlanilha" type="button">
+                        Escolher arquivo
+                    </button>
+
+                    <small class="planilha-ajuda">
+                        Aceita CSV UTF-8, Excel .xls e Excel moderno .xlsx.
+                    </small>
+                </div>
+
+            </div>
+
+
+            <section class="planilha-preview" id="planilhaPreview" hidden>
+                <div class="planilha-preview-topo">
+                    <div>
+                        <span class="planilha-preview-etapa">Pré-visualização</span>
+                        <h3>Confira antes de importar</h3>
+                        <p id="planilhaPreviewArquivo">—</p>
+                    </div>
+
+                    <button
+                        class="botao-secundario"
+                        id="btnCancelarPreviewPlanilha"
+                        type="button"
+                    >
+                        Escolher outro arquivo
+                    </button>
+                </div>
+
+                <div class="planilha-preview-resumo">
+                    <div class="preview-resumo-card criar">
+                        <span>Criar</span>
+                        <strong id="previewQtdCriar">0</strong>
+                    </div>
+                    <div class="preview-resumo-card atualizar">
+                        <span>Atualizar</span>
+                        <strong id="previewQtdAtualizar">0</strong>
+                    </div>
+                    <div class="preview-resumo-card ignorar">
+                        <span>Ignorar</span>
+                        <strong id="previewQtdIgnorar">0</strong>
+                    </div>
+                    <div class="preview-resumo-card erro">
+                        <span>Erros</span>
+                        <strong id="previewQtdErro">0</strong>
+                    </div>
+                </div>
+
+                <div class="planilha-preview-aviso" id="planilhaPreviewAviso">
+                    Nenhuma alteração foi aplicada ao banco. Confirme somente depois de revisar os dados abaixo.
+                </div>
+
+                <div class="tabela-container planilha-preview-tabela-wrap">
+                    <table class="tabela planilha-preview-tabela">
+                        <thead>
+                            <tr>
+                                <th>Linha</th>
+                                <th>Ação</th>
+                                <th>Produto</th>
+                                <th>Código</th>
+                                <th>Categoria</th>
+                                <th>Qtd.</th>
+                                <th>Motivo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaPreviewPlanilha">
+                            <tr>
+                                <td colspan="7" class="tabela-estado-vazio">
+                                    Selecione uma planilha para visualizar.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="planilha-preview-acoes">
+                    <button
+                        class="botao-secundario"
+                        id="btnVoltarPreviewPlanilha"
+                        type="button"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        class="botao-principal"
+                        id="btnConfirmarImportacaoPlanilha"
+                        type="button"
+                        disabled
+                    >
+                        Confirmar importação
+                    </button>
+                </div>
+            </section>
+
+            <div class="planilha-colunas">
+                <strong>Colunas aceitas</strong>
+                <span>
+                    código de barras, nome, categoria, custo, preço de venda,
+                    quantidade, estoque mínimo, unidade, validade e ativo.
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" id="modalProduto">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="tituloModalProduto">
+                    Novo Produto
+                </h2>
+
+                <p>
+                    Preencha os dados do produto.
+                </p>
+            </div>
+
+            <button
+                class="modal-fechar"
+                id="fecharModalProduto"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="formProduto">
+
+            <input
+                type="hidden"
+                id="produtoId"
+            >
+
+
+            <div class="form-grid">
+
+                <div class="campo campo-grande">
+
+                    <label>
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="produtoNome"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Código de barras
+                    </label>
+
+                    <input
+                        type="text"
+                        id="produtoCodigo"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Categoria
+                    </label>
+
+                    <select id="produtoCategoria">
+
+                        <option value="">
+                            Sem categoria
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo admin-custo" id="campoProdutoCusto">
+
+                    <label>
+                        Preço de custo
+                    </label>
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        id="produtoCusto"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Preço de venda
+                    </label>
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        id="produtoVenda"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Quantidade inicial
+                    </label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="produtoQuantidade"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Estoque mínimo
+                    </label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        id="produtoMinimo"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="campo campo-grande">
+
+                    <label>
+                        Controle de estoque
+                    </label>
+
+                    <select id="produtoTipoEstoque">
+                        <option value="normal">
+                            Normal - este produto possui o próprio estoque
+                        </option>
+                        <option value="fracionado">
+                            Fracionado - 1 item físico rende várias vendas
+                        </option>
+                        <option value="kit">
+                            Kit / Combo - 1 venda baixa várias unidades físicas
+                        </option>
+                    </select>
+
+                    <small>
+                        Fracionado: 1 garrafa pode render várias doses. Kit/Combo: 1 Balde de 10 cervejas baixa 10 cervejas do estoque.
+                    </small>
+
+                </div>
+
+
+                <div
+                    class="config-fracionado campo-grande"
+                    id="configProdutoFracionado"
+                    style="display: none;"
+                >
+
+                    <div class="fracionado-explicacao">
+                        <strong>Estoque calculado automaticamente</strong>
+                        <small>
+                            Você pode vincular até 3 produtos físicos.
+                            O número de doses disponíveis será limitado pelo produto que acabar primeiro.
+                        </small>
+                    </div>
+
+                    <div class="fracionado-componente">
+                        <div class="fracionado-componente-titulo">
+                            Produto físico 1
+                            <span>obrigatório</span>
+                        </div>
+
+                        <div class="form-grid config-fracionado-grid">
+                            <div class="campo campo-grande">
+                                <label>Produto que será consumido</label>
+                                <select id="produtoEstoqueVinculado">
+                                    <option value="">Selecione o produto físico</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Quantas doses rende 1 unidade?</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    step="1"
+                                    value="5"
+                                    id="produtoFatorConversao"
+                                >
+                                <small>
+                                    Ex.: 1 garrafa rende 5 doses.
+                                </small>
+                            </div>
+
+                            <div class="campo">
+                                <label>Progresso atual</label>
+                                <div class="fracionado-progresso" id="produtoFracaoAtual">
+                                    0 / 5 doses
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fracionado-componente">
+                        <div class="fracionado-componente-titulo">
+                            Produto físico 2
+                            <span>opcional</span>
+                        </div>
+
+                        <div class="form-grid config-fracionado-grid">
+                            <div class="campo campo-grande">
+                                <label>Segundo produto consumido</label>
+                                <select id="produtoEstoqueVinculado2">
+                                    <option value="">Nenhum segundo produto</option>
+                                </select>
+                                <small>
+                                    Ex.: energético usado junto com a dose de Gin.
+                                </small>
+                            </div>
+
+                            <div class="campo">
+                                <label>Quantas doses rende 1 unidade?</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    step="1"
+                                    value="1"
+                                    id="produtoFatorConversao2"
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label>Progresso atual</label>
+                                <div class="fracionado-progresso" id="produtoFracaoAtual2">
+                                    —
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fracionado-componente">
+                        <div class="fracionado-componente-titulo">
+                            Produto físico 3
+                            <span>opcional</span>
+                        </div>
+
+                        <div class="form-grid config-fracionado-grid">
+                            <div class="campo campo-grande">
+                                <label>Terceiro produto consumido</label>
+                                <select id="produtoEstoqueVinculado3">
+                                    <option value="">Nenhum terceiro produto</option>
+                                </select>
+                                <small>
+                                    Ex.: gelo de coco usado junto com a dose de Gin.
+                                </small>
+                            </div>
+
+                            <div class="campo">
+                                <label>Quantas doses rende 1 unidade?</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    step="1"
+                                    value="1"
+                                    id="produtoFatorConversao3"
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label>Progresso atual</label>
+                                <div class="fracionado-progresso" id="produtoFracaoAtual3">
+                                    —
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fracionado-disponibilidade">
+                        <span>Doses disponíveis agora</span>
+                        <strong id="produtoFracionadoDisponivel">0</strong>
+                    </div>
+
+                    <div
+                        class="fracionado-limitante-preview"
+                        id="produtoFracionadoLimitante"
+                    >
+                        Selecione os produtos físicos para calcular o ingrediente limitante.
+                    </div>
+
+                    <small class="produto-fracionado-info">
+                        Exemplo: 10 garrafas com rendimento de 5 doses por garrafa = 50 doses disponíveis.
+                        Se também houver energético e gelo de coco vinculados, o sistema usa o menor estoque disponível entre os produtos.
+                    </small>
+
+                </div>
+
+
+                <div
+                    class="config-fracionado campo-grande"
+                    id="configProdutoKit"
+                    style="display: none;"
+                >
+
+                    <div class="fracionado-explicacao">
+                        <strong>Kit / Combo com baixa automática</strong>
+                        <small>
+                            Use para Balde de cerveja, combo de bebidas ou qualquer produto em que uma venda consome várias unidades físicas.
+                        </small>
+                    </div>
+
+                    <div class="fracionado-componente">
+                        <div class="fracionado-componente-titulo">
+                            Produto físico 1
+                            <span>obrigatório</span>
+                        </div>
+
+                        <div class="form-grid config-fracionado-grid">
+                            <div class="campo campo-grande">
+                                <label>Produto que será retirado do estoque</label>
+                                <select id="produtoKitEstoqueVinculado">
+                                    <option value="">Selecione o produto físico</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Quantidade retirada por venda</label>
+                                <input type="number" min="1" step="1" value="10" id="produtoKitQuantidade">
+                                <small>Ex.: Balde com 10 cervejas = 10.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fracionado-componente">
+                        <div class="fracionado-componente-titulo">
+                            Produto físico 2
+                            <span>opcional</span>
+                        </div>
+
+                        <div class="form-grid config-fracionado-grid">
+                            <div class="campo campo-grande">
+                                <label>Segundo produto consumido</label>
+                                <select id="produtoKitEstoqueVinculado2">
+                                    <option value="">Nenhum segundo produto</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Quantidade retirada por venda</label>
+                                <input type="number" min="1" step="1" value="1" id="produtoKitQuantidade2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fracionado-componente">
+                        <div class="fracionado-componente-titulo">
+                            Produto físico 3
+                            <span>opcional</span>
+                        </div>
+
+                        <div class="form-grid config-fracionado-grid">
+                            <div class="campo campo-grande">
+                                <label>Terceiro produto consumido</label>
+                                <select id="produtoKitEstoqueVinculado3">
+                                    <option value="">Nenhum terceiro produto</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Quantidade retirada por venda</label>
+                                <input type="number" min="1" step="1" value="1" id="produtoKitQuantidade3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fracionado-disponibilidade">
+                        <span>Kits / Combos disponíveis agora</span>
+                        <strong id="produtoKitDisponivel">0</strong>
+                    </div>
+
+                    <div class="fracionado-limitante-preview" id="produtoKitLimitante">
+                        Selecione os produtos físicos para calcular quantos Kits/Combos podem ser vendidos.
+                    </div>
+
+                    <small class="produto-fracionado-info">
+                        Exemplo: cadastre “Balde Heineken 10 unidades”, selecione “Heineken 269ml” e informe 10. Ao vender 1 balde, o sistema retira 10 Heineken do estoque. Se cancelar a venda, as 10 unidades voltam automaticamente.
+                    </small>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Unidade
+                    </label>
+
+                    <select id="produtoUnidade">
+
+                        <option value="un">
+                            Unidade
+                        </option>
+
+                        <option value="garrafa">
+                            Garrafa
+                        </option>
+
+                        <option value="dose">
+                            Dose
+                        </option>
+
+                        <option value="lata">
+                            Lata
+                        </option>
+
+                        <option value="caixa">
+                            Caixa
+                        </option>
+
+                        <option value="fardo">
+                            Fardo
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+                    <label>Validade</label>
+
+                    <input
+                        type="date"
+                        id="produtoValidade"
+                    >
+
+                    <small>
+                        Opcional. Informe a data de validade atual do produto.
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="botao-secundario"
+                    id="cancelarProduto"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="botao-principal"
+                >
+                    Salvar Produto
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="modal-overlay" id="modalMovimentacao">
+
+    <div class="modal modal-pequeno">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="tituloMovimentacao">
+                    Movimentação
+                </h2>
+
+                <p id="nomeProdutoMovimentacao"></p>
+            </div>
+
+            <button
+                class="modal-fechar"
+                id="fecharModalMovimentacao"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="formMovimentacao">
+
+            <input
+                type="hidden"
+                id="movimentacaoProdutoId"
+            >
+
+            <input
+                type="hidden"
+                id="movimentacaoTipo"
+            >
+
+
+            <div class="campo">
+
+                <label id="labelQuantidadeMovimentacao">
+                    Quantidade
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    id="movimentacaoQuantidade"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    Motivo
+                </label>
+
+                <input
+                    type="text"
+                    id="movimentacaoMotivo"
+                    placeholder="Ex.: reposição, quebra..."
+                >
+
+            </div>
+
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="botao-secundario"
+                    id="cancelarMovimentacao"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="botao-principal"
+                >
+                    Confirmar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="modalAbrirCaixa">
+
+    <div class="modal modal-pequeno">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Abrir Caixa</h2>
+                <p>Informe o valor inicial em dinheiro.</p>
+            </div>
+
+            <button
+                class="modal-fechar"
+                id="fecharModalAbrirCaixa"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="formAbrirCaixa">
+
+            <div class="campo">
+
+                <label>
+                    Valor inicial
+                </label>
+
+                <input
+                    type="number"
+                    id="valorInicialCaixa"
+                    step="0.01"
+                    min="0"
+                    value="0"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="botao-secundario"
+                    id="cancelarAbrirCaixa"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="botao-principal"
+                >
+                    Abrir Caixa
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="modal-overlay" id="modalMovimentoCaixa">
+
+    <div class="modal modal-pequeno">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="tituloMovimentoCaixa">
+                    Movimentação
+                </h2>
+
+                <p id="descricaoMovimentoCaixa">
+                    Movimentação financeira
+                </p>
+            </div>
+
+            <button
+                class="modal-fechar"
+                id="fecharModalMovimentoCaixa"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="formMovimentoCaixa">
+
+            <input
+                type="hidden"
+                id="tipoMovimentoCaixa"
+            >
+
+            <div class="campo">
+
+                <label>Valor</label>
+
+                <input
+                    type="number"
+                    id="valorMovimentoCaixa"
+                    step="0.01"
+                    min="0.01"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Descrição</label>
+
+                <input
+                    type="text"
+                    id="motivoMovimentoCaixa"
+                    placeholder="Ex.: troco adicional"
+                >
+
+            </div>
+
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="botao-secundario"
+                    id="cancelarMovimentoCaixa"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="botao-principal"
+                >
+                    Confirmar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="modal-overlay" id="modalFecharCaixa">
+
+    <div class="modal modal-pequeno">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Fechar Caixa</h2>
+                <p>Conte somente o dinheiro físico.</p>
+            </div>
+
+            <button
+                class="modal-fechar"
+                id="fecharModalFecharCaixa"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="fechamento-resumo">
+
+            <div>
+                <span>Esperado</span>
+
+                <strong id="fechamentoEsperado">
+                    R$ 0,00
+                </strong>
+            </div>
+
+        </div>
+
+
+        <form id="formFecharCaixa">
+
+            <div class="campo">
+
+                <label>
+                    Dinheiro contado
+                </label>
+
+                <input
+                    type="number"
+                    id="valorContadoCaixa"
+                    step="0.01"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <div class="resultado-diferenca">
+
+                <span>Diferença</span>
+
+                <strong id="previewDiferencaCaixa">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+            <div class="fechamento-resumo" id="fechamentoResumo">
+
+    <div class="fechamento-resumo-grid">
+
+        <div>
+            <span>Aberto por</span>
+            <strong id="fechamentoAbertoPor">-</strong>
+        </div>
+
+        <div>
+            <span>Fechando como</span>
+            <strong id="fechamentoFechadoPor">-</strong>
+        </div>
+
+        <div>
+            <span>Vendas</span>
+            <strong id="fechamentoVendas">0</strong>
+        </div>
+
+        <div>
+            <span>Faturamento</span>
+            <strong id="fechamentoFaturamento">R$ 0,00</strong>
+        </div>
+
+        <div class="admin-custo">
+            <span>Custo</span>
+            <strong id="fechamentoCusto">R$ 0,00</strong>
+        </div>
+
+        <div class="admin-custo">
+            <span>Lucro</span>
+            <strong id="fechamentoLucro">R$ 0,00</strong>
+        </div>
+
+        <div class="admin-custo">
+            <span>Margem</span>
+            <strong id="fechamentoMargem">0,00%</strong>
+        </div>
+
+        <div>
+            <span>Descontos</span>
+            <strong id="fechamentoDescontos">R$ 0,00</strong>
+        </div>
+
+    </div>
+
+    <div class="fechamento-pagamentos">
+
+        <h3>Formas de pagamento</h3>
+
+        <div>
+            <span>Dinheiro</span>
+            <strong id="fechamentoDinheiro">R$ 0,00</strong>
+        </div>
+
+        <div>
+            <span>PIX</span>
+            <strong id="fechamentoPix">R$ 0,00</strong>
+        </div>
+
+        <div>
+            <span>Débito</span>
+            <strong id="fechamentoDebito">R$ 0,00</strong>
+        </div>
+
+        <div>
+            <span>Crédito</span>
+            <strong id="fechamentoCredito">R$ 0,00</strong>
+        </div>
+
+        <div class="fechamento-troco-info">
+            <span>Troco entregue</span>
+            <strong id="fechamentoTrocoEntregue">R$ 0,00</strong>
+        </div>
+
+    </div>
+
+    <div class="fechamento-caixa-resumo">
+
+        <div>
+            <span>Valor inicial</span>
+            <strong id="fechamentoValorInicial">R$ 0,00</strong>
+        </div>
+
+        <div>
+            <span>Suprimentos</span>
+            <strong id="fechamentoSuprimentos">R$ 0,00</strong>
+        </div>
+
+        <div>
+            <span>Sangrias</span>
+            <strong id="fechamentoSangrias">R$ 0,00</strong>
+        </div>
+
+        <div class="destaque">
+            <span>Dinheiro esperado</span>
+            <strong id="fechamentoDinheiroEsperado">R$ 0,00</strong>
+        </div>
+
+    </div>
+
+</div>
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="botao-secundario"
+                    id="cancelarFecharCaixa"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="botao-principal"
+                >
+                    Confirmar Fechamento
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal-overlay" id="modalVendaFinalizada">
+    <div class="modal-venda-sucesso">
+
+        <button
+            class="modal-venda-fechar"
+            id="fecharVendaFinalizada"
+        >
+            ×
+        </button>
+
+        <div class="icone-sucesso">
+            ✓
+        </div>
+
+        <h2>Venda finalizada com sucesso!</h2>
+
+        <p class="subtitulo-sucesso">
+            A venda foi registrada e o estoque foi atualizado.
+        </p>
+
+        <div class="resumo-venda-sucesso">
+
+            <div class="venda-identificacao">
+                <div class="icone-recibo">
+                    🧾
+                </div>
+
+                <div>
+                    <strong id="sucessoVendaId">
+                        Venda #0
+                    </strong>
+
+                    <span id="sucessoVendaData">
+                        -
+                    </span>
+                </div>
+            </div>
+
+            <div class="venda-valores">
+
+                <div>
+                    <span>Total</span>
+                    <strong id="sucessoVendaTotal">
+                        R$ 0,00
+                    </strong>
+                </div>
+
+                <div class="sucesso-pagamentos-bloco">
+                    <span>Pagamento</span>
+                    <div id="sucessoVendaPagamentos" class="lista-pagamentos-venda"></div>
+                </div>
+
+                <div id="linhaSucessoRecebido">
+                    <span>Recebido</span>
+                    <strong id="sucessoVendaRecebido">
+                        R$ 0,00
+                    </strong>
+                </div>
+
+                <div id="linhaSucessoTroco">
+                    <span>Troco</span>
+                    <strong
+                        id="sucessoVendaTroco"
+                        class="valor-troco-sucesso"
+                    >
+                        R$ 0,00
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mensagem-sucesso">
+            <span>✓</span>
+
+            <div>
+                <strong>Venda concluída</strong>
+                <p>O caixa e o estoque foram atualizados.</p>
+            </div>
+        </div>
+
+        <div class="acoes-venda-sucesso">
+
+            <button
+                class="botao-principal"
+                id="btnNovaVenda"
+            >
+                Nova venda
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- MODAL SELECIONAR COMANDA -->
+<div class="modal-overlay" id="modalSelecionarComanda">
+    <div class="modal modal-comanda-seletor">
+        <div class="modal-header">
+            <div>
+                <h2>Guardar em comanda</h2>
+                <p>Escolha uma comanda aberta ou crie uma nova.</p>
+            </div>
+            <button class="modal-fechar" id="fecharModalSelecionarComanda" type="button">×</button>
+        </div>
+        <div class="comanda-rapida-form">
+            <input id="novaComandaRapidaNome" type="text" maxlength="80" placeholder="Nome, mesa ou número da nova comanda">
+            <button class="botao-principal" id="btnCriarComandaRapida" type="button">Criar e usar</button>
+        </div>
+        <div class="comanda-seletor-lista" id="listaSelecionarComanda"></div>
+    </div>
+</div>
+
+<!-- MODAL DETALHES DA COMANDA -->
+<div class="modal-overlay" id="modalDetalhesComanda">
+    <div class="modal modal-comanda-detalhes">
+        <div class="modal-header">
+            <div>
+                <span class="comanda-modal-etiqueta">COMANDA EM ABERTO</span>
+                <h2 id="detalhesComandaTitulo">Comanda</h2>
+                <p id="detalhesComandaMeta">—</p>
+            </div>
+            <button class="modal-fechar" id="fecharModalDetalhesComanda" type="button">×</button>
+        </div>
+        <div class="comanda-detalhes-resumo">
+            <div><span>Itens</span><strong id="detalhesComandaQtd">0</strong></div>
+            <div><span>Total atual</span><strong id="detalhesComandaTotal">R$ 0,00</strong></div>
+        </div>
+        <div class="comanda-itens-lista" id="detalhesComandaItens"></div>
+        <div class="modal-acoes comanda-modal-acoes">
+            <button class="botao-perigo-suave" id="btnCancelarComandaDetalhes" type="button">Cancelar comanda</button>
+            <div class="comanda-modal-acoes-direita">
+                <button class="botao-secundario" id="btnContinuarComandaDetalhes" type="button">+ Adicionar consumo</button>
+                <button class="botao-principal" id="btnReceberComandaDetalhes" type="button">Receber no PDV</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay modal-overlay-sistema" id="modalSistema">
+    <div class="modal-sistema modal-sistema-moderno" role="dialog" aria-modal="true" aria-labelledby="modalSistemaTitulo">
+
+        <button
+            class="modal-sistema-fechar"
+            id="modalSistemaFechar"
+            type="button"
+            aria-label="Fechar"
+        >
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+
+        <div class="modal-sistema-topo">
+            <div class="modal-sistema-icone" id="modalSistemaIcone">
+                <svg class="icone-sucesso" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+                <svg class="icone-erro" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></svg>
+                <svg class="icone-aviso" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17h.01"/></svg>
+                <svg class="icone-confirmacao" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="M9.7 9.5a2.5 2.5 0 0 1 4.8.8c0 2-2.5 2.2-2.5 4M12 17h.01"/></svg>
+            </div>
+
+            <div>
+                <span class="modal-sistema-etiqueta" id="modalSistemaEtiqueta">Aviso do sistema</span>
+                <h2 id="modalSistemaTitulo">Tudo certo!</h2>
+            </div>
+        </div>
+
+        <p id="modalSistemaMensagem">Operação realizada com sucesso.</p>
+
+        <div class="modal-sistema-detalhes" id="modalSistemaDetalhes"></div>
+
+        <div class="modal-sistema-acoes">
+            <button class="botao-secundario" id="modalSistemaCancelar" type="button">Cancelar</button>
+            <button class="botao-principal" id="modalSistemaConfirmar" type="button">OK</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalDetalhesVenda">
+
+    <div class="modal modal-venda-detalhes">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="detalheVendaTitulo">
+                    Venda
+                </h2>
+
+                <p id="detalheVendaData">
+                    -
+                </p>
+            </div>
+
+            <button
+                class="modal-fechar"
+                id="fecharDetalhesVenda"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="detalhe-venda-informacoes">
+
+            <div>
+                <span>Tipo de venda</span>
+                <strong id="detalheVendaTipo">-</strong>
+            </div>
+
+            <div>
+                <span>Status</span>
+                <strong id="detalheVendaStatus">-</strong>
+            </div>
+
+            <div>
+                <span>Pagamento</span>
+                <strong id="detalheVendaPagamento">-</strong>
+            </div>
+
+        </div>
+
+        <div class="detalhe-pagamentos">
+            <h3>Formas de pagamento</h3>
+            <div id="detalheVendaPagamentos" class="lista-pagamentos-venda"></div>
+        </div>
+
+        <div class="detalhe-produtos">
+
+            <h3>Produtos</h3>
+
+            <div id="detalheVendaItens"></div>
+
+        </div>
+
+        <div class="detalhe-totais">
+
+            <div>
+                <span>Subtotal</span>
+                <strong id="detalheVendaSubtotal">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div>
+                <span>Desconto</span>
+                <strong id="detalheVendaDesconto">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div class="detalhe-total-final">
+                <span>Total</span>
+                <strong id="detalheVendaTotal">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div id="detalheLinhaRecebido">
+                <span>Recebido</span>
+                <strong id="detalheVendaRecebido">
+                    R$ 0,00
+                </strong>
+            </div>
+
+            <div id="detalheLinhaTroco">
+                <span>Troco</span>
+                <strong
+                    id="detalheVendaTroco"
+                    class="valor-verde"
+                >
+                    R$ 0,00
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="modal-acoes">
+
+            <button
+                class="botao-perigo"
+                id="btnCancelarVenda"
+            >
+                Cancelar Venda
+            </button>
+<button
+                class="botao-principal"
+                id="btnFecharDetalhesVenda"
+            >
+                Fechar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- MODAL NOVO / EDITAR USUÁRIO -->
+<div class="modal-overlay" id="modalUsuario">
+    <div class="modal modal-usuario">
+        <div class="modal-header">
+            <div><h2 id="tituloModalUsuario">Novo usuário</h2><p>Defina os dados de acesso ao sistema.</p></div>
+            <button class="modal-fechar" id="fecharModalUsuario" type="button">×</button>
+        </div>
+        <form id="formUsuario">
+            <input type="hidden" id="usuarioId">
+            <div class="form-grid">
+                <div class="campo campo-grande"><label>Nome completo</label><input type="text" id="usuarioNome" required maxlength="100"></div>
+                <div class="campo"><label>Usuário</label><input type="text" id="usuarioLogin" required maxlength="50" autocomplete="off"></div>
+                <div class="campo"><label>Perfil</label><select id="usuarioPerfil"><option value="operador">Operador</option><option value="administrador">Administrador</option></select></div>
+                <div class="campo campo-grande" id="campoSenhaNovoUsuario"><label>Senha</label><input type="password" id="usuarioSenha" minlength="6" autocomplete="new-password" placeholder="Mínimo de 6 caracteres"><small class="campo-ajuda">Obrigatória para novos usuários.</small></div>
+            </div>
+            <div class="modal-acoes"><button class="botao-secundario" id="cancelarModalUsuario" type="button">Cancelar</button><button class="botao-principal" type="submit">Salvar usuário</button></div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL ALTERAR SENHA -->
+<div class="modal-overlay" id="modalSenhaUsuario">
+    <div class="modal modal-pequeno">
+        <div class="modal-header">
+            <div><h2>Alterar senha</h2><p id="senhaUsuarioDescricao">Informe a nova senha.</p></div>
+            <button class="modal-fechar" id="fecharModalSenhaUsuario" type="button">×</button>
+        </div>
+        <form id="formSenhaUsuario">
+            <input type="hidden" id="senhaUsuarioId">
+            <div class="campo"><label>Nova senha</label><input type="password" id="novaSenhaUsuario" minlength="6" required autocomplete="new-password" placeholder="Mínimo de 6 caracteres"></div>
+            <div class="campo"><label>Confirmar nova senha</label><input type="password" id="confirmarSenhaUsuario" minlength="6" required autocomplete="new-password"></div>
+            <div class="modal-acoes"><button class="botao-secundario" id="cancelarModalSenhaUsuario" type="button">Cancelar</button><button class="botao-principal" type="submit">Alterar senha</button></div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- MODAL MINHA SENHA -->
+<div class="modal-overlay" id="modalMinhaSenha">
+    <div class="modal modal-pequeno">
+        <div class="modal-header">
+            <div>
+                <h2>Alterar minha senha</h2>
+                <p>Confirme sua senha atual antes de definir a nova.</p>
+            </div>
+            <button class="modal-fechar" id="fecharModalMinhaSenha" type="button">×</button>
+        </div>
+        <form id="formMinhaSenha">
+            <div class="campo">
+                <label>Senha atual</label>
+                <input type="password" id="minhaSenhaAtual" required autocomplete="current-password">
+            </div>
+            <div class="campo">
+                <label>Nova senha</label>
+                <input type="password" id="minhaNovaSenha" minlength="6" required autocomplete="new-password" placeholder="Mínimo de 6 caracteres">
+            </div>
+            <div class="campo">
+                <label>Confirmar nova senha</label>
+                <input type="password" id="minhaNovaSenhaConfirmar" minlength="6" required autocomplete="new-password">
+            </div>
+            <div class="modal-acoes">
+                <button class="botao-secundario" id="cancelarModalMinhaSenha" type="button">Cancelar</button>
+                <button class="botao-principal" type="submit">Alterar senha</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+        <script src="js/app.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+ADEGA PDV 2.1.7 - LICENCIAMENTO OFFLINE
+=======================================
+
+IMPLEMENTADO
+- Licenças temporárias com vencimento.
+- Licenças permanentes sem vencimento.
+- Vínculo opcional ao Código da instalação.
+- Assinatura digital Ed25519.
+- Somente a chave pública fica no aplicativo distribuído.
+- Gerador de licenças separado com a chave privada.
+- Tela de ativação antes do login.
+- Bloqueio das APIs operacionais sem licença válida.
+- Verificação automática da licença durante o uso.
+- Área Sistema > Licenciamento para visualizar e trocar a chave.
+- Licença armazenada fora do SQLite, preservada em atualizações/restaurações do banco.
+- Detecção local de recuo de relógio para licenças temporárias.
+- Licenças permanentes não dependem do relógio do computador.
+
+CORREÇÃO ADICIONAL
+- login.js consultava /api/auth/me, mas o backend expõe /api/auth/sessao.
+  A verificação de sessão na tela de login foi corrigida.
+
+TESTES EXECUTADOS
+- Sintaxe de 29 arquivos JavaScript: OK.
+- IDs HTML duplicados em index/login/ativação: 0.
+- Chave privada ausente do pacote do aplicativo: OK.
+- Inicialização sem licença: APIs operacionais retornam 402: OK.
+- Redirecionamento login -> ativação sem licença: OK.
+- Chave temporária vinculada: OK.
+- Chave permanente vinculada: OK.
+- Chave emitida para outra instalação: rejeitada.
+- Chave com assinatura alterada: rejeitada.
+- Chave temporária expirada: rejeitada.
+- Recuo de relógio em licença temporária: detectado.
+- Login administrativo após ativação: OK.
+- Diagnóstico reportando licença e versão 2.1.7: OK.
+- Remoção administrativa da licença bloqueia APIs imediatamente: OK.
+
+LIMITAÇÃO CONHECIDA
+O licenciamento é totalmente offline. Como o aplicativo é local e os arquivos Node/JavaScript
+ficam no computador, um usuário tecnicamente avançado com acesso aos arquivos pode modificar
+o programa para remover verificações. Para proteção antifraude mais forte seria necessário um
+servidor de ativação remoto, que não foi usado nesta versão.

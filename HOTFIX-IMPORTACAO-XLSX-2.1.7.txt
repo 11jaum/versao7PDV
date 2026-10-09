@@ -1,0 +1,32 @@
+ADEGA PDV 2.1.7 - HOTFIX IMPORTAÇÃO XLSX
+==========================================
+
+Erro corrigido:
+Planilhas XLSX com células vazias no meio da linha podiam deslocar
+o conteúdo da célula seguinte durante a leitura.
+
+Exemplos afetados:
+- produto sem código de barras;
+- produto sem data de validade;
+- qualquer linha com uma célula vazia entre colunas preenchidas.
+
+Causa:
+O leitor XLSX aceitava primeiro a expressão de célula com conteúdo.
+Uma célula vazia auto-fechada (<c ... />) podia acabar capturando o
+valor da próxima célula.
+
+Correção:
+- células auto-fechadas agora são reconhecidas primeiro;
+- a referência original da coluna é preservada;
+- valores posteriores permanecem na coluna correta.
+
+Teste usado:
+AdegaPDV-produtos-teste-exportacao.xlsx
+- 25 linhas de produtos
+- campos vazios no início e no meio da linha
+- código iniciado em zero
+- produto inativo
+- datas preenchidas e vazias
+
+Resultado após a correção:
+- todas as 25 linhas são lidas nas colunas corretas.

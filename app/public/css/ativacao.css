@@ -1,0 +1,454 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: dark;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    background: #08111f;
+    color: #ecf5ff;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    background: #08111f;
+}
+
+body {
+    min-height: 100vh;
+}
+
+button,
+textarea {
+    font: inherit;
+}
+
+.ativacao-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(420px, 1.08fr) minmax(460px, .92fr);
+}
+
+.ativacao-brand {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    padding: 38px clamp(38px, 5vw, 82px);
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(circle at 18% 15%, rgba(47,157,244,.18), transparent 34%),
+        radial-gradient(circle at 82% 76%, rgba(52,211,153,.12), transparent 32%),
+        linear-gradient(145deg, #07101d 0%, #0a1626 54%, #0b1b2c 100%);
+    border-right: 1px solid rgba(122, 164, 205, .12);
+}
+
+.brand-glow {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(36px);
+    opacity: .6;
+    pointer-events: none;
+}
+
+.brand-glow-1 {
+    width: 280px;
+    height: 280px;
+    right: -100px;
+    top: 16%;
+    background: rgba(47,157,244,.14);
+}
+
+.brand-glow-2 {
+    width: 240px;
+    height: 240px;
+    left: -100px;
+    bottom: 8%;
+    background: rgba(52,211,153,.10);
+}
+
+.brand-topo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, rgba(47,157,244,.24), rgba(52,211,153,.14));
+    border: 1px solid rgba(114,189,255,.22);
+    box-shadow: 0 14px 34px rgba(0,0,0,.22);
+}
+
+.brand-logo svg {
+    width: 20px;
+    height: 30px;
+    fill: none;
+    stroke: #d8ecff;
+    stroke-width: 1.7;
+}
+
+.brand-nome {
+    display: grid;
+    gap: 2px;
+}
+
+.brand-nome strong {
+    letter-spacing: .08em;
+    font-size: 18px;
+}
+
+.brand-nome strong span {
+    color: #52b4ff;
+}
+
+.brand-nome small,
+.brand-rodape {
+    color: #7892aa;
+}
+
+.brand-conteudo {
+    position: relative;
+    z-index: 2;
+    width: min(640px, 100%);
+    margin: auto 0;
+    padding: 52px 0;
+}
+
+.brand-chip,
+.ativacao-chip {
+    display: inline-flex;
+    padding: 7px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .035em;
+}
+
+.brand-chip {
+    color: #a9d6ff;
+    background: rgba(47,157,244,.10);
+    border: 1px solid rgba(71,166,246,.18);
+}
+
+.brand-conteudo h1 {
+    margin: 22px 0 18px;
+    font-size: clamp(40px, 5.2vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+}
+
+.brand-conteudo > p {
+    max-width: 580px;
+    margin: 0;
+    color: #9bb0c4;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.brand-recursos {
+    display: grid;
+    gap: 12px;
+    margin-top: 34px;
+}
+
+.brand-recursos > div {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 14px;
+    border-radius: 15px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(133,170,206,.09);
+}
+
+.recurso-icone {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    color: #bde5ff;
+    background: rgba(47,157,244,.09);
+    font-weight: 800;
+}
+
+.brand-recursos strong,
+.brand-recursos small {
+    display: block;
+}
+
+.brand-recursos small {
+    margin-top: 3px;
+    color: #7f97ad;
+    line-height: 1.4;
+}
+
+.brand-rodape {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 16px rgba(52,211,153,.55);
+}
+
+.ativacao-area {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 38px;
+    background:
+        radial-gradient(circle at 50% 30%, rgba(47,157,244,.07), transparent 36%),
+        #0a1320;
+}
+
+.ativacao-container {
+    width: min(570px, 100%);
+}
+
+.ativacao-card {
+    padding: 31px;
+    border-radius: 24px;
+    background: rgba(15, 28, 45, .92);
+    border: 1px solid rgba(133,170,206,.16);
+    box-shadow: 0 28px 80px rgba(0,0,0,.34);
+}
+
+.ativacao-chip {
+    color: #8ed0ff;
+    background: rgba(47,157,244,.10);
+    border: 1px solid rgba(47,157,244,.18);
+}
+
+.ativacao-cabecalho h2 {
+    margin: 15px 0 8px;
+    font-size: 29px;
+    letter-spacing: -.03em;
+}
+
+.ativacao-cabecalho p {
+    margin: 0;
+    color: #8ea5ba;
+    line-height: 1.55;
+}
+
+.instalacao-box {
+    margin-top: 24px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border-radius: 15px;
+    background: #0a1625;
+    border: 1px solid rgba(120,161,201,.15);
+}
+
+.instalacao-box > div {
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+}
+
+.instalacao-box span,
+.instalacao-ajuda {
+    color: #7790a8;
+    font-size: 12px;
+}
+
+.instalacao-box strong {
+    overflow-wrap: anywhere;
+    color: #d9ecff;
+    font-family: Consolas, "Courier New", monospace;
+    letter-spacing: .04em;
+}
+
+.instalacao-ajuda {
+    display: block;
+    margin: 8px 4px 22px;
+    line-height: 1.5;
+}
+
+.btn-secundario {
+    flex: 0 0 auto;
+    border: 1px solid rgba(132,173,214,.18);
+    background: rgba(255,255,255,.03);
+    color: #c7daec;
+    padding: 9px 13px;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #c8d8e8;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    min-height: 144px;
+    resize: vertical;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(125,165,203,.18);
+    outline: none;
+    background: #081420;
+    color: #dcedfb;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    transition: border-color .18s, box-shadow .18s;
+}
+
+textarea:focus {
+    border-color: rgba(56,166,255,.52);
+    box-shadow: 0 0 0 3px rgba(47,157,244,.08);
+}
+
+textarea::placeholder {
+    color: #4f6880;
+}
+
+.mensagem {
+    display: none;
+    margin-top: 12px;
+    padding: 11px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.mensagem.ativo {
+    display: block;
+}
+
+.mensagem-erro {
+    color: #ffbdc8;
+    background: rgba(251,91,120,.08);
+    border: 1px solid rgba(251,91,120,.19);
+}
+
+.mensagem-sucesso {
+    color: #9ce8c9;
+    background: rgba(52,211,153,.08);
+    border: 1px solid rgba(52,211,153,.18);
+}
+
+.btn-ativar {
+    width: 100%;
+    min-height: 51px;
+    margin-top: 15px;
+    border: 0;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    background: linear-gradient(135deg, #248eea, #29b99a);
+    box-shadow: 0 14px 32px rgba(26,133,203,.20);
+    transition: transform .15s, filter .15s;
+}
+
+.btn-ativar:hover:not(:disabled) {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+}
+
+.btn-ativar:disabled {
+    cursor: wait;
+    opacity: .7;
+}
+
+.btn-ativar svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.seguranca-box {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    align-items: center;
+    color: #70889e;
+}
+
+.seguranca-box svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #5d84a7;
+    stroke-width: 1.7;
+}
+
+.seguranca-box p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.versao {
+    margin: 16px 0 0;
+    text-align: center;
+    color: #5e778f;
+    font-size: 12px;
+}
+
+@media (max-width: 980px) {
+    .ativacao-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .ativacao-brand {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .ativacao-area {
+        padding: 18px;
+        align-items: start;
+    }
+
+    .ativacao-card {
+        padding: 22px;
+        margin-top: 22px;
+    }
+
+    .instalacao-box {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .btn-secundario {
+        width: 100%;
+    }
+}

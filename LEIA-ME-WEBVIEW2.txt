@@ -1,0 +1,774 @@
+ADEGA PDV - WEBVIEW2 V2
+========================
+
+CORREÇÃO PRINCIPAL
+------------------
+A versão anterior usava o Node.js instalado no Windows durante "npm ci".
+No seu computador isso usou Node 24.19.0 e o npm tentou recompilar
+better-sqlite3 com node-gyp, passando a exigir Python.
+
+A versão V2 muda o processo:
+
+1. NÃO usa o Node instalado no Windows.
+2. Baixa Node.js 22.20.0 x64 oficial em uma pasta local ".tools".
+3. Instala dependências com "--ignore-scripts".
+4. Testa better-sqlite3 de verdade antes de continuar.
+5. Se o SQLite não carregar, para antes de gerar um app quebrado.
+6. Baixa um .NET 8 SDK LOCAL usando o instalador oficial da Microsoft.
+7. Compila o launcher WebView2 self-contained.
+8. Copia o Node portátil para "dist\runtime\node.exe".
+9. Faz um segundo teste do SQLite dentro da própria pasta "dist".
+
+RESULTADO
+---------
+Depois da compilação:
+
+dist\
+  AdegaPDV.exe
+  *.dll do launcher self-contained
+  app\
+    server.js
+    node_modules\
+    database\
+    ...
+  runtime\
+    node.exe
+  data\
+  logs\
+
+O computador que executar a pasta "dist" não precisa ter:
+- Node.js instalado;
+- Python;
+- npm;
+- .NET Desktop Runtime.
+
+Ele precisa do Microsoft Edge WebView2 Runtime.
+Windows 11 e a maioria das instalações atuais do Windows 10 já possuem.
+
+COMO GERAR
+----------
+1. Extraia o ZIP em uma pasta normal, por exemplo:
+   C:\AdegaPDV-WebView2-v2
+
+2. Feche qualquer versão do AdegaPDV que estiver aberta.
+
+3. Execute:
+   PREPARAR-WEBVIEW2.bat
+
+4. Na primeira execução, deixe a internet conectada.
+
+5. Aguarde até aparecer "PRONTO".
+
+6. Abra:
+   dist\AdegaPDV.exe
+
+BANCO ATUAL
+-----------
+O gerador NÃO apaga nem substitui automaticamente seu banco atual.
+
+Depois de gerar "dist", execute:
+COPIAR-BANCO-ATUAL.bat
+
+e informe a pasta da versão atual do seu AdegaPDV.
+
+O banco será copiado para:
+dist\app\database\adega.db
+
+Faça sempre backup do adega.db antes de substituir qualquer versão.
+
+SE DER ERRO
+-----------
+O processo grava:
+PREPARAR-WEBVIEW2.log
+
+Envie esse arquivo para diagnóstico.
+
+IMPORTANTE
+----------
+A V2 foi feita especificamente para evitar o erro anterior:
+
+node-gyp -> find Python -> Could not find any Python installation to use
+
+Você NÃO precisa instalar Python por causa do AdegaPDV.
+
+ATALHOS DO APP
+--------------
+F11      Tela cheia
+Ctrl + R Recarregar interface
+
+
+V2.1 - CORREÇÃO POWERSHELL
+--------------------------
+Corrigido o erro em que $PSScriptRoot podia chegar vazio em algumas formas
+de execução do PowerShell. O gerador agora resolve a própria pasta usando
+$MyInvocation e, como último recurso, a pasta atual.
+
+
+V2.2 - CORREÇÃO DO TESTE FINAL
+------------------------------
+Corrigido o teste 7/7. A versão anterior executava JavaScript inline com "node -e",
+e o PowerShell/cmd alterava as aspas do código, causando:
+SyntaxError: Unexpected token ':'
+
+Agora o teste final grava um arquivo JavaScript temporário dentro da pasta
+"dist\app", executa esse arquivo com o Node portátil e remove o arquivo depois.
+Isso evita qualquer problema de escaping de aspas.
+
+
+V2.3 - MIGRAÇÃO DE BANCO CORRIGIDA
+----------------------------------
+A cópia simples do arquivo adega.db foi substituída por uma migração SQLite
+consistente usando o próprio better-sqlite3 da versão WebView2.
+
+Use:
+MIGRAR-BANCO-ATUAL.bat
+
+O utilitário:
+1. procura automaticamente o adega.db antigo;
+2. aceita também o caminho completo do arquivo;
+3. cria backup do banco atual da versão WebView2 antes de substituir;
+4. usa SQLite backup em vez de simples Copy-Item;
+5. valida o banco de destino;
+6. mostra contagem de registros de tabelas principais.
+
+Feche a versão antiga e a versão WebView2 antes de migrar.
+
+
+V2.4 - CORREÇÃO DE RESOLUÇÃO DO BETTER-SQLITE3
+-----------------------------------------------
+Corrigido o erro:
+Cannot find module 'better-sqlite3'
+
+O migrador fica na raiz do pacote, enquanto node_modules fica em dist\app.
+Agora o MIGRAR-BANCO.js usa createRequire() apontando explicitamente para
+dist\app\package.json, garantindo que better-sqlite3 seja carregado da
+instalação correta.
+
+Também foi adicionado PRAGMA integrity_check após a migração.
+
+
+V2.5 - VERSÃO PROFISSIONAL
+==========================
+
+1. ÍCONE E VERSIONAMENTO
+------------------------
+O launcher agora possui:
+- ícone próprio Adega PDV;
+- ícone na janela;
+- ícone no executável;
+- versão 1.0.0;
+- metadados de produto no arquivo .exe.
+
+2. INSTALADOR SETUP.EXE
+-----------------------
+Depois de gerar a pasta dist, execute:
+
+GERAR-INSTALADOR.bat
+
+O script procura o Inno Setup 6. Se não encontrar e o Windows possuir winget,
+tenta instalá-lo automaticamente.
+
+O instalador final fica em:
+
+installer\output\AdegaPDV-Setup-1.0.0.exe
+
+Ele:
+- instala em %LOCALAPPDATA%\Programs\AdegaPDV;
+- cria atalho na Área de Trabalho;
+- cria atalho no menu Iniciar;
+- registra desinstalador;
+- abre o Adega PDV ao terminar;
+- preserva database, backups, data e logs em atualizações.
+
+Ao gerar o instalador, você pode escolher:
+[1] incluir seu banco atual na primeira instalação;
+[2] gerar instalador limpo.
+
+ATENÇÃO:
+Se incluir seu banco no Setup, não compartilhe esse instalador com terceiros.
+
+3. ATUALIZAÇÃO SEGURA
+---------------------
+Para gerar um ZIP de atualização:
+
+CRIAR-PACOTE-ATUALIZACAO.bat
+
+Ele cria um pacote que NÃO contém:
+- banco de dados;
+- backups;
+- cache/sessão;
+- logs.
+
+O instalador também nunca sobrescreve um adega.db já existente.
+
+Antes de uma atualização pelo Setup, um backup do banco existente é criado em:
+
+app\backups\antes-atualizacao
+
+4. DESINSTALAÇÃO
+----------------
+O Inno Setup registra o Adega PDV normalmente em "Aplicativos instalados"
+do Windows.
+
+Os dados criados pelo usuário não são empacotados como arquivos normais do
+instalador; isso reduz o risco de apagar o banco durante uma atualização.
+
+
+V2.6 - CORREÇÃO DO COMPILADOR INNO SETUP
+-----------------------------------------
+Corrigido o erro:
+Unknown preprocessor directive
+na linha que continha #13#10.
+
+O texto de erro agora usa Chr(13) + Chr(10), evitando que o preprocessor
+do Inno Setup interprete "#13" como uma diretiva.
+
+Também foi corrigido o banco opcional do instalador:
+- instalador COM banco: seed\adega.db é incluído somente na primeira instalação;
+- instalador LIMPO: a ausência de seed\adega.db não aborta a compilação.
+
+Setup gerado: AdegaPDV-Setup-1.0.1.exe
+
+
+V3.0 / ADEGA PDV 1.1.0 - ESTABILIDADE
+======================================
+
+NOVO: INSTÂNCIA ÚNICA
+---------------------
+O launcher usa Mutex do Windows.
+Se tentar abrir AdegaPDV.exe duas vezes, a segunda execução exibe:
+"O Adega PDV já está aberto neste computador."
+
+NOVO: BACKUP AUTOMÁTICO DIÁRIO
+------------------------------
+Ao iniciar o Adega PDV:
+- se existir app\database\adega.db;
+- e ainda não existir backup do dia;
+
+é criado:
+app\backups\automaticos\adega_YYYY-MM-DD.db
+
+São mantidos os 30 backups automáticos mais recentes.
+
+NOVO: MENU SISTEMA
+------------------
+Na parte superior do aplicativo existe "Sistema" com:
+- Criar backup agora
+- Restaurar backup...
+- Abrir pasta de backups
+- Recarregar interface
+- Tela cheia
+- Sobre / Diagnóstico
+
+Atalho para backup manual:
+Ctrl + Shift + B
+
+NOVO: RESTAURAÇÃO DE BACKUP
+---------------------------
+"Sistema > Restaurar backup..." permite escolher um arquivo .db.
+
+Antes da restauração:
+1. o banco atual recebe um backup;
+2. o servidor Node é encerrado;
+3. o banco escolhido substitui o banco atual;
+4. o servidor é iniciado novamente;
+5. a interface é recarregada.
+
+Se o servidor não conseguir iniciar após a restauração, o launcher tenta
+voltar automaticamente ao banco anterior.
+
+NOVO: SOBRE / DIAGNÓSTICO
+-------------------------
+Mostra:
+- versão do Adega PDV;
+- servidor ativo/inativo;
+- endereço local;
+- Node embutido/sistema;
+- versão do WebView2;
+- caminho e tamanho do banco;
+- último backup;
+- pasta do aplicativo.
+
+LOG ROTATIVO
+------------
+logs\server.log passa a rotacionar ao atingir aproximadamente 5 MB.
+O log anterior é mantido como server.log.1.
+
+VERSÃO
+------
+Adega PDV 1.1.0
+Setup: AdegaPDV-Setup-1.1.0.exe
+
+
+V3.1 / ADEGA PDV 1.2.0 - SISTEMA DENTRO DO APP
+===============================================
+
+A tela nativa "Sistema" do Windows foi removida para deixar a experiência
+mais simples. As funções administrativas agora ficam dentro da própria
+interface do Adega PDV.
+
+NOVO MENU LATERAL:
+Sistema
+
+Dentro dele:
+- Status do servidor
+- Status/tamanho do banco
+- Último backup
+- Versão do aplicativo
+- Criar/baixar backup
+- Restaurar backup
+- Abrir pasta de backups
+- Diagnóstico de Node.js
+- Diagnóstico de SQLite
+- Versão do WebView2
+- Tempo de atividade
+- Quantidade de backups
+
+BACKUP AUTOMÁTICO
+-----------------
+Continua sendo feito pelo backend do Adega PDV, uma vez por dia,
+com retenção de até 30 backups automáticos.
+
+RESTAURAÇÃO NO WEBVIEW2
+-----------------------
+Ao restaurar um backup pela tela Sistema:
+1. o backend valida o arquivo;
+2. cria uma cópia de segurança do banco atual;
+3. restaura o banco escolhido;
+4. encerra o Node;
+5. o launcher WebView2 recebe a solicitação e reinicia o Node;
+6. a interface é carregada novamente.
+
+Não é necessário fechar manualmente o programa na restauração normal.
+
+INSTÂNCIA ÚNICA
+---------------
+O bloqueio contra abrir dois AdegaPDV.exe ao mesmo tempo continua ativo,
+mas funciona silenciosamente no launcher.
+
+VERSÃO
+------
+Adega PDV 1.2.0
+Setup: AdegaPDV-Setup-1.2.0.exe
+
+
+V3.2 / ADEGA PDV 1.3.0 - UX MODERNO
+====================================
+
+ATALHOS DO PDV
+--------------
+F2  - foca a pesquisa de produtos
+F4  - abre/finaliza o fluxo de venda
+F6  - foca a forma de pagamento
+F8  - repete a última venda, quando disponível
+Esc - fecha modal ativo ou limpa a pesquisa do PDV
+
+Os atalhos aparecem discretamente no topo do PDV.
+
+TELA DE CARREGAMENTO
+--------------------
+A abertura do WebView2 agora possui tela escura própria com:
+- monograma AP;
+- nome Adega PDV;
+- mensagem de status;
+- barra de carregamento.
+
+O usuário não vê apenas uma tela vazia enquanto Node e WebView2 iniciam.
+
+LAYOUT / ÍCONES
+---------------
+O menu lateral passou a usar ícones vetoriais SVG de linha, substituindo emojis.
+Também foram atualizados:
+- cantos dos painéis;
+- animação leve de hover;
+- cartões de produto;
+- botões;
+- inputs;
+- indicadores de atalhos.
+
+Não foi adicionada biblioteca de ícones externa, portanto a interface continua
+funcionando totalmente offline.
+
+VERSÃO
+------
+Adega PDV 1.3.0
+Setup: AdegaPDV-Setup-1.3.0.exe
+
+
+V3.3 / ADEGA PDV 1.4.0 - REDESIGN PREMIUM
+==========================================
+
+O webapp foi redesenhado para ficar mais próximo de um dashboard SaaS
+moderno, com aparência comercial e mantendo funcionamento totalmente local.
+
+PRINCIPAIS ALTERAÇÕES
+---------------------
+- novo Dashboard com banner de boas-vindas;
+- data/hora no dashboard;
+- KPIs com cartões modernos;
+- gráfico de faturamento dos últimos 7 dias redesenhado;
+- ranking de produtos com barras de desempenho;
+- gráfico donut por categoria, calculado com dados reais dos produtos;
+- painel moderno de caixa;
+- painel moderno de alertas;
+- menu lateral redesenhado;
+- topbar redesenhada;
+- busca rápida no topo: digite e pressione Enter para ir ao PDV;
+- avatar com iniciais do usuário;
+- ícones SVG consistentes;
+- visual dark premium;
+- light mode mantido;
+- layout responsivo.
+
+ESTRELA / FAVORITOS
+-------------------
+A estrela visual do favorito foi removida. Os favoritos do PDV agora usam
+coração discreto (♡ / ♥), preservando a mesma funcionalidade.
+
+IMPORTANTE
+----------
+O redesign não altera tabelas do banco nem as regras de venda, estoque,
+caixa ou relatórios. IDs usados pelas rotinas existentes foram mantidos
+para evitar regressões.
+
+VERSÃO
+------
+Adega PDV 1.4.0
+Setup: AdegaPDV-Setup-1.4.0.exe
+
+
+V3.5 / ADEGA PDV 1.5.0 - RECURSOS PRO
+======================================
+
+IMPORTAR / EXPORTAR PRODUTOS E ESTOQUE
+--------------------------------------
+Na tela Estoque, administradores têm o botão "Importar / Exportar".
+
+Exportação:
+- CSV UTF-8;
+- Excel .xls compatível com Microsoft Excel;
+- inclui código de barras, nome, categoria, custo, preço de venda,
+  quantidade, estoque mínimo, unidade, validade, ativo e tipo de estoque.
+
+Importação:
+- identifica produto pelo código de barras e, se necessário, pelo nome;
+- cria categorias automaticamente;
+- cria produtos físicos novos;
+- atualiza cadastro de produtos existentes;
+- alterações de quantidade geram movimentação de estoque;
+- produtos fracionados existentes preservam o estoque virtual/componentes;
+- produto fracionado novo continua sendo criado pela tela do sistema,
+  pois precisa dos vínculos físicos.
+
+Para importar uma planilha criada fora do Adega PDV, prefira CSV UTF-8.
+O .xls exportado pelo próprio sistema também pode ser importado novamente.
+
+ATUALIZAÇÃO DENTRO DO APP
+--------------------------
+Sistema > Atualização do Adega PDV:
+1. selecione AdegaPDV-Atualizacao-*.zip;
+2. o backend valida e prepara o pacote;
+3. clique em "Aplicar e reiniciar";
+4. o launcher fecha;
+5. o atualizador aguarda os processos liberarem os arquivos;
+6. cria backup do adega.db;
+7. instala a nova versão sem substituir database/backups/data/logs;
+8. abre o Adega PDV novamente.
+
+Em caso de falha, a versão existente é reaberta e o detalhe fica em:
+logs\atualizacao.log
+
+RESPONSIVO
+----------
+Polimento específico para:
+- 1366x768;
+- notebooks menores;
+- 1024px / tablet landscape;
+- tablet portrait;
+- tabelas com rolagem horizontal segura;
+- sidebar compacta em telas menores;
+- telas Sistema, Estoque e Dashboard reorganizadas automaticamente.
+
+MICROANIMAÇÕES
+--------------
+Foram adicionadas animações discretas:
+- entrada de telas;
+- abertura de modais;
+- hover de cards;
+- feedback de clique em botões.
+
+O sistema respeita "Reduzir movimento" do Windows/navegador.
+
+VERSÃO
+------
+Adega PDV 1.5.0
+Setup: AdegaPDV-Setup-1.5.0.exe
+
+
+V3.6 / ADEGA PDV 1.6.0 - UX COMPLETO
+=====================================
+
+LOGIN MODERNO
+-------------
+A tela de login foi completamente redesenhada:
+- layout premium em duas áreas;
+- identidade visual igual ao dashboard;
+- ícones SVG;
+- campos com feedback de foco;
+- botão com estado "Entrando...";
+- erro de autenticação mais elegante;
+- layout adaptado para notebook e tablet;
+- sem emojis na interface principal do login.
+
+MODAIS MODERNOS
+---------------
+Os modais gerais ganharam:
+- fundo com blur;
+- cabeçalhos e botões mais limpos;
+- modal de sucesso/erro/aviso/confirmação redesenhado;
+- ícones vetoriais por tipo;
+- melhor contraste em claro e escuro;
+- animação curta e discreta.
+
+SKELETON / LOADING
+------------------
+Foram adicionados placeholders skeleton para dados assíncronos:
+- produtos do PDV;
+- ranking do dashboard;
+- categorias do dashboard;
+- usuários;
+- auditoria.
+
+Os skeletons desaparecem automaticamente quando os dados reais são renderizados.
+
+ATALHOS COMPLETOS DO PDV
+------------------------
+F2      Buscar produto
+F3      Selecionar/navegar no carrinho
+↑ / ↓   Item anterior / próximo no carrinho
++       Aumentar quantidade do item selecionado
+-       Diminuir quantidade do item selecionado
+Delete  Remover item selecionado
+F5      Focar desconto
+F6      Focar forma de pagamento
+F7      Focar valor recebido em dinheiro
+F8      Repetir última venda
+F4      Finalizar venda
+Esc     Fechar modal ou limpar busca
+
+Ao usar o teclado, o item atual do carrinho recebe destaque visual.
+
+VERSÃO
+------
+Adega PDV 1.6.0
+Setup: AdegaPDV-Setup-1.6.0.exe
+
+
+V3.6.1 - CORRECAO DO ATUALIZADOR
+=================================
+
+A tela de atualizacao NAO instala:
+- Projeto Completo.zip
+- Patch.zip
+
+Ela instala somente:
+AdegaPDV-Atualizacao-*.zip
+
+Agora o sistema:
+- bloqueia ZIP incorreto antes de fechar o aplicativo;
+- aceita pacote FULL;
+- aceita pacote WEBAPP;
+- aceita ZIP com uma unica pasta externa;
+- exige update-manifest.json;
+- preserva adega.db;
+- cria backup antes da atualizacao;
+- corrige caracteres quebrados nas mensagens do PowerShell.
+
+Para gerar FULL:
+PREPARAR-WEBVIEW2.bat
+CRIAR-PACOTE-ATUALIZACAO.bat
+
+Para gerar somente webapp:
+CRIAR-ATUALIZACAO-WEBAPP.bat
+
+Versao: 1.6.1
+
+
+V3.6.2 / ADEGA PDV 1.6.2 - IMPORTAÇÃO CORRIGIDA
+=================================================
+
+Correção:
+O botão "Importar / Exportar" da tela Estoque existia no HTML,
+mas os eventos JavaScript do modal não estavam presentes na V1.6.1.
+
+Agora:
+- o botão abre o modal corretamente;
+- CSV exporta normalmente;
+- Excel .xls exporta normalmente;
+- "Escolher arquivo" abre o seletor;
+- CSV e .xls podem ser importados;
+- após importar, produtos, estoque, categorias e PDV são atualizados;
+- a importação continua registrando mudanças de quantidade como movimentação;
+- .xlsx foi removido do seletor porque ainda não é lido diretamente.
+
+Versão: Adega PDV 1.6.2
+
+
+V3.6.3 / ADEGA PDV 1.6.3 - ROLAGEM DOS MODAIS
+===============================================
+
+Corrigido o problema em que formulários altos, como:
+Novo Produto > Controle de estoque > Fracionado
+
+ficavam cortados e sem barra de rolagem.
+
+Agora:
+- o modal respeita a altura da janela;
+- a rolagem vertical volta a funcionar;
+- o cabeçalho do modal permanece visível;
+- a barra de rolagem é discreta;
+- funciona em notebook menor e tablet;
+- a página ao fundo não rola junto com o modal.
+
+Versão: Adega PDV 1.6.3
+
+
+V3.6.5 / ADEGA PDV 1.6.5 - LOADING PREMIUM
+============================================
+
+A tela de abertura do WebView2 foi redesenhada.
+
+Agora possui:
+- painel central moderno;
+- identidade AP / Adega PDV;
+- versão visível;
+- status de inicialização em tempo real;
+- barra de progresso animada;
+- etapas como:
+  * verificando arquivos;
+  * verificando servidor;
+  * iniciando servidor;
+  * carregando interface;
+  * tudo pronto;
+- visual escuro alinhado ao restante do sistema;
+- desaparecimento suave antes da interface principal.
+
+Versão: Adega PDV 1.6.5
+
+
+V3.6.6 / ADEGA PDV 1.6.6 - POLIMENTO RESPONSIVO FINAL
+=======================================================
+
+Foco principal: resolução 1366x768.
+
+Ajustes:
+- sidebar menos larga;
+- topbar mais compacta;
+- hero menor;
+- KPIs mais compactos;
+- gráficos com altura ajustada;
+- ranking mais compacto;
+- donut de categorias reduzido;
+- melhor uso da altura disponível;
+- títulos não ficam espremidos/cortados;
+- grids usam min-width:0 corretamente;
+- tabelas passam a rolar horizontalmente quando necessário;
+- sidebar compacta automaticamente em telas intermediárias;
+- layout de tablet revisado;
+- bordas mais leves e consistentes;
+- modais respeitam melhor telas de pouca altura.
+
+Versão: Adega PDV 1.6.6
+
+
+V3.6.7 / ADEGA PDV 1.6.7 - DASHBOARD DO OPERADOR
+==================================================
+
+CORREÇÃO
+--------
+O operador não possui permissão para /api/relatorios.
+O dashboard antigo exibia skeletons do gráfico semanal e do ranking,
+mas essas informações nunca chegavam para esse perfil.
+
+Agora o Dashboard se adapta ao usuário.
+
+ADMINISTRADOR
+-------------
+Continua vendo:
+- faturamento/vendas;
+- gráfico de 7 dias;
+- ranking de produtos;
+- produtos sem giro;
+- estoque/categorias;
+- caixa;
+- alertas;
+- estoque baixo e validades.
+
+OPERADOR
+--------
+Vê somente informações operacionais permitidas:
+- faturamento e vendas do dia;
+- produtos cadastrados;
+- estoque baixo / sem estoque;
+- categorias;
+- situação do caixa;
+- alertas de estoque e validade;
+- lista de itens com estoque baixo;
+- validades próximas.
+
+Para operador:
+- gráfico de 7 dias é ocultado;
+- ranking de 30 dias é ocultado;
+- produtos sem venda é ocultado;
+- nenhum endpoint /api/relatorios é chamado;
+- skeleton de relatório não é criado;
+- não existe mais carregamento infinito.
+
+Versão: Adega PDV 1.6.7
+
+
+V3.6.9 / ADEGA PDV 1.6.9 - HOTFIX TELA CHEIA
+==============================================
+
+Corrigido erro de compilação CS0111:
+MainForm já possuía AlternarTelaCheia() para o F11.
+A versão 1.6.8 adicionou uma segunda implementação com o mesmo nome.
+
+Agora existe apenas uma implementação de AlternarTelaCheia().
+O botão da interface e o F11 usam a mesma rotina.
+O estado do botão continua sincronizado com a janela WebView2.
+
+
+V3.7.0 / ADEGA PDV 1.7.0 - ATUALIZADOR REVISADO
+=================================================
+
+Revisão final do fluxo de atualização:
+
+1. PACOTE COMPLETO
+- Gerado por CRIAR-PACOTE-ATUALIZACAO.bat.
+- Valida AdegaPDV.exe, app/server.js e manifesto.
+- Nunca inclui adega.db, WAL ou SHM.
+- Preserva app/database, app/backups, data, logs e temp.
+
+2. PACOTE WEBAPP
+- Gerado por CRIAR-ATUALIZACAO-WEBAPP.bat.
+- Agora inclui node_modules para suportar novas dependências offline.
+- Nunca inclui banco ou backups.
+- Atualiza também o script do atualizador quando necessário.
+
+3. ATUALIZAÇÃO PELO SISTEMA
+- O ZIP é validado ANTES do botão Aplicar ser liberado.
+- Verifica manifesto, produto, tipo e estrutura interna.
+- Aceita pacotes com pasta externa/wrapper.
+- Mostra tipo e versão detectados.
+- Pacotes com banco são rejeitados por segurança.
+
+4. PROTEÇÃO DOS DADOS
+- Aguarda o aplicativo fechar antes de copiar.
+- Tenta executar checkpoint SQLite.
+- Cria backup .db antes da atualização.
+- Cria snapshot com adega.db + WAL/SHM quando existirem.
+- Pastas de banco e backups são excluídas da cópia.
+- Em erro, o log informa a causa e o app tenta reiniciar.
+
+Versão: Adega PDV 1.7.0

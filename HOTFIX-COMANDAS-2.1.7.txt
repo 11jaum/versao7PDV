@@ -1,0 +1,42 @@
+ADEGA PDV 2.1.7 - HOTFIX COMANDAS
+====================================
+
+PROBLEMA
+Ao criar uma nova comanda, ela era salva corretamente no banco, mas a
+interface exibia:
+Cannot read properties of null (reading 'reset')
+
+Ao fechar e abrir a tela de Comandas, a comanda aparecia criada.
+
+CAUSA
+O evento submit usava:
+evento.currentTarget.reset()
+
+porém isso acontecia depois de:
+await criarComanda(...)
+
+Em eventos DOM, currentTarget só é garantido durante o despacho do evento.
+Depois de um await ele pode estar null. Assim:
+1. a API criava a comanda;
+2. a execução voltava ao navegador;
+3. currentTarget estava null;
+4. reset() gerava erro;
+5. o catch mostrava "Erro ao abrir comanda", mesmo a criação tendo funcionado.
+
+CORREÇÃO
+- a referência do formulário agora é salva antes do await;
+- reset() usa essa referência preservada;
+- campos do formulário possuem leitura defensiva;
+- nome vazio devolve foco ao campo;
+- mensagem de erro ganhou fallback e log técnico.
+
+RESULTADO ESPERADO
+1. Abra Comandas.
+2. Digite um nome.
+3. Clique para abrir/criar a comanda.
+4. A comanda deve aparecer imediatamente.
+5. O formulário deve ser limpo.
+6. Deve aparecer "Comanda aberta".
+7. Não é necessário fechar e reabrir a tela.
+
+As licenças existentes continuam compatíveis.

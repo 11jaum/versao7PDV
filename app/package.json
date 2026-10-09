@@ -1,0 +1,22 @@
+{
+  "name": "adegapdv",
+  "version": "2.1.7",
+  "description": "Adega PDV - sistema local de vendas, estoque, caixa e comandas",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node scripts/verificarCodigo.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "multer": "^2.3.0",
+    "pdfkit": "^0.20.2"
+  }
+}

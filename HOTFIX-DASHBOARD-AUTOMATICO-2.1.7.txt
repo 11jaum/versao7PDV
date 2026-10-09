@@ -1,0 +1,31 @@
+ADEGA PDV 2.1.7 - DASHBOARD AUTOMÁTICO
+========================================
+
+PROBLEMA
+O Dashboard era carregado na inicialização, mas depois podia continuar exibindo
+valores antigos mesmo após vendas, estoque, inventário ou caixa terem mudado.
+
+CAUSA
+Ao voltar para a tela Dashboard, o sistema atualizava somente algumas partes
+da interface. Além disso, não existia uma rotina periódica de atualização do
+Dashboard completo.
+
+CORREÇÕES
+- ao entrar no Dashboard, todos os dados são consultados novamente;
+- Dashboard aberto atualiza automaticamente a cada 10 segundos;
+- ao voltar para a janela do Adega PDV, atualiza imediatamente;
+- ao voltar de outra aba/programa, atualiza imediatamente;
+- botão Atualizar usa o mesmo controlador;
+- requisições sobrepostas são bloqueadas para evitar chamadas duplicadas;
+- categorias, estoque, vendas, faturamento, caixa, alertas e dados avançados
+  passam pelo mesmo ciclo de atualização;
+- operador continua sem chamar endpoints administrativos.
+
+TESTE
+1. Deixe o Dashboard aberto.
+2. Faça uma venda ou altere estoque/inventário.
+3. Volte ao Dashboard.
+4. Os cards devem atualizar imediatamente.
+5. Mesmo sem trocar de tela, em até 10 segundos os valores devem se atualizar.
+
+As licenças existentes continuam compatíveis.

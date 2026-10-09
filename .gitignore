@@ -1,0 +1,14 @@
+dist/
+app/node_modules/
+app/database/*.db
+app/database/*.db-shm
+app/database/*.db-wal
+app/backups/
+app/logs/
+data/
+logs/
+launcher/bin/
+launcher/obj/
+
+.tools/
+PREPARAR-WEBVIEW2.log
